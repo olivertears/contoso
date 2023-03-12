@@ -1,12 +1,11 @@
 export enum RouteNames {
   NOT_FOUND = '/not_found',
-  MENU = '/',
-  STORE = '/store',
+  SIGN_IN = '/sign_in',
 
-  AUTH = '/authorization',
+  PROFILES = '/profiles',
+  PRODUCTS = '/products',
+  SPECIFICATIONS = '/specifications',
 
-  PROFILE = '/profile',
-  CART = '/cart',
-  FAVORITES = '/favorites',
-  ORDERS = '/orders'
+  PRODUCTION_ORDERS = '/production_orders',
+  TAKEAWAY_ORDERS = '/takeaway_orders'
 }

@@ -3,6 +3,8 @@ import { useForm } from 'react-hook-form';
 
 import { Button, Form, Input, Title } from '../../ui';
 import { AuthenticateData } from '../../../api/auth/auth.types';
+import { EmployeeRoleEnum, IEmployee } from '../../../interfaces/IEmployee';
+import { employeeService } from '../../../services/employee';
 
 export const SignInForm: FC = () => {
   const {
@@ -12,7 +14,10 @@ export const SignInForm: FC = () => {
   } = useForm({ defaultValues: { email: '', password: '' } });
 
   const onSubmit = (data: AuthenticateData) => {
-    console.log(data);
+    const role = data.email.split('@')[0].toUpperCase();
+    if (role in EmployeeRoleEnum) {
+      employeeService.setEmployee({ role } as IEmployee);
+    }
   };
 
   return (

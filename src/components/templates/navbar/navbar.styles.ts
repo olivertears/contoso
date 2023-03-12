@@ -1,10 +1,6 @@
 import styled from 'styled-components';
 import { Link } from '../../ui';
 
-export const Wrap = styled.div`
-  width: 100%;
-`;
-
 export const Navbar = styled.div`
   width: 100%;
   height: 50px;

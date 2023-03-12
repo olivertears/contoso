@@ -1,39 +1,59 @@
 import { FC } from 'react';
-import { Routes, Route, BrowserRouter, Navigate } from 'react-router-dom';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 
-import { userService } from '../../services/user';
+import { employeeService } from '../../services/employee';
 import { RouteNames } from './router.types';
 import { NotFound } from '../pages/not-found';
-import { Auth } from '../pages/auth';
+import { SignIn } from '../pages/sign-in';
 import { Navbar } from '../templates/navbar';
-import { Menu } from '../pages/menu';
-import { Cart } from '../pages/cart';
-import { Store } from '../pages/store';
-import { Favorites } from '../pages/favorites';
-import { Profile } from '../pages/profile';
-import { Orders } from '../pages/orders';
+import { Profiles } from '../pages/profiles';
+import { Products } from '../pages/products';
+import { Specifications } from '../pages/specifications';
+import { ProductionOrders } from '../pages/production-orders';
+import { TakeawayOrders } from '../pages/takeaway-orders';
+import { EmployeeRoleEnum } from '../../interfaces/IEmployee';
+import { observer } from 'mobx-react-lite';
 
-export const Router: FC = () => {
+export const Router: FC = observer(() => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route element={<Navbar />}>
-          {!!userService.user$ ? (
-            <>
-              <Route path={RouteNames.PROFILE} element={<Profile />} />
-              <Route path={RouteNames.CART} element={<Cart />} />
-              <Route path={RouteNames.FAVORITES} element={<Favorites />} />
-              <Route path={RouteNames.ORDERS} element={<Orders />} />
-            </>
-          ) : (
-            <Route path={RouteNames.AUTH} element={<Auth />} />
-          )}
-          <Route path={RouteNames.MENU} element={<Menu />} />
-          <Route path={RouteNames.STORE} element={<Store />} />
-          <Route path={RouteNames.NOT_FOUND} element={<NotFound />} />
-          <Route path="*" element={<Navigate to={RouteNames.NOT_FOUND} replace />} />
-        </Route>
+        {!employeeService.employee$ ? (
+          <Route path={RouteNames.SIGN_IN} element={<SignIn />} />
+        ) : (
+          <Route element={<Navbar />}>
+            {employeeService.employee$.role === EmployeeRoleEnum.TECHNOLOGIST ? (
+              <>
+                <Route path={RouteNames.PROFILES} element={<Profiles />} />
+                <Route path={RouteNames.PRODUCTS} element={<Products />} />
+                <Route path={RouteNames.SPECIFICATIONS} element={<Specifications />} />
+                <Route path="*" element={<Navigate to={RouteNames.PROFILES} replace />} />
+              </>
+            ) : employeeService.employee$.role === EmployeeRoleEnum.DISPATCHER ? (
+              <>
+                <Route path={RouteNames.PRODUCTION_ORDERS} element={<ProductionOrders />} />
+                <Route path="*" element={<Navigate to={RouteNames.PRODUCTION_ORDERS} replace />} />
+              </>
+            ) : (
+              <>
+                <Route path={RouteNames.TAKEAWAY_ORDERS} element={<TakeawayOrders />} />
+                <Route path={RouteNames.PRODUCTION_ORDERS} element={<ProductionOrders />} />
+                <Route path="*" element={<Navigate to={RouteNames.TAKEAWAY_ORDERS} replace />} />
+              </>
+            )}
+          </Route>
+        )}
+        <Route path={RouteNames.NOT_FOUND} element={<NotFound />} />
+        <Route
+          path="*"
+          element={
+            <Navigate
+              to={employeeService.employee$ ? RouteNames.NOT_FOUND : RouteNames.SIGN_IN}
+              replace
+            />
+          }
+        />
       </Routes>
     </BrowserRouter>
   );
-};
+});
