@@ -1,21 +1,15 @@
 export interface IEmployee {
   id: string;
   email: string;
-  first_name: string;
-  middle_name: string;
-  last_name: string;
+  firstName: string;
+  middleName: string;
+  lastName: string;
   role: EmployeeRoleEnum;
-  status: EmployeeStatusEnum;
+  isActive: boolean;
 }
 
 export enum EmployeeRoleEnum {
-  TECHNOLOGIST = 'TECHNOLOGIST',
-  DISPATCHER = 'DISPATCHER',
-  ASSEMBLY_MASTER = 'ASSEMBLY_MASTER',
-  PAINTING_MASTER = 'PAINTING_MASTER'
-}
-
-export enum EmployeeStatusEnum {
+  ADMIN = 'ADMIN',
   TECHNOLOGIST = 'TECHNOLOGIST',
   DISPATCHER = 'DISPATCHER',
   ASSEMBLY_MASTER = 'ASSEMBLY_MASTER',

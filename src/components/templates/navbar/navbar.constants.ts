@@ -1,11 +1,12 @@
 import { Link } from './navbar.types';
-import { RouteNames } from '../../router/router.types';
+import { RouteNames } from '../router/router.types';
 import { EmployeeRoleEnum } from '../../../interfaces/IEmployee';
 
 export const NAVBAR_COMMON_LINKS: Link[] = [{ name: 'Sign In', link: RouteNames.SIGN_IN }];
 
+export const NAVBAR_ADMIN_LINKS: Link[] = [{ name: 'Profiles', link: RouteNames.PROFILES }];
+
 export const NAVBAR_TECHNOLOGIST_LINKS: Link[] = [
-  { name: 'Profiles', link: RouteNames.PROFILES },
   { name: 'Products', link: RouteNames.PRODUCTS },
   { name: 'Specifications', link: RouteNames.SPECIFICATIONS }
 ];
@@ -21,6 +22,7 @@ export const NAVBAR_MASTER_LINKS: Link[] = [
 
 export const NAVBAR_LINKS: { [key in EmployeeRoleEnum | 'COMMON']: Link[] } = {
   COMMON: NAVBAR_COMMON_LINKS,
+  ADMIN: NAVBAR_ADMIN_LINKS,
   TECHNOLOGIST: NAVBAR_TECHNOLOGIST_LINKS,
   DISPATCHER: NAVBAR_DISPATCHER_LINKS,
   ASSEMBLY_MASTER: NAVBAR_MASTER_LINKS,
