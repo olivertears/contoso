@@ -1,11 +1,11 @@
 export enum RouteNames {
-  NOT_FOUND = '/not_found',
-  SIGN_IN = '/sign_in',
+  AUTHORIZATION = '/authorization',
 
-  PROFILES = '/profiles',
+  EMPLOYEES = '/employees',
   PRODUCTS = '/products',
+  MATERIALS = '/materials',
   SPECIFICATIONS = '/specifications',
 
-  PRODUCTION_ORDERS = '/production_orders',
-  TAKEAWAY_ORDERS = '/takeaway_orders'
+  PRODUCT_ORDERS = '/product_orders',
+  MATERIAL_ORDERS = '/material_orders'
 }

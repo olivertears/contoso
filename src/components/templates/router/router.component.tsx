@@ -1,18 +1,21 @@
 import { FC } from 'react';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+import { observer } from 'mobx-react-lite';
 
 import { employeeService } from '../../../services/employee';
 import { RouteNames } from './router.types';
-import { NotFound } from '../../pages/not-found';
-import { SignIn } from '../../pages/sign-in';
+import { EmployeeRoleEnum } from '../../../interfaces';
+
 import { Navbar } from '../navbar';
-import { Profiles } from '../../pages/profiles';
-import { Products } from '../../pages/products';
-import { Specifications } from '../../pages/specifications';
-import { ProductionOrders } from '../../pages/production-orders';
-import { TakeawayOrders } from '../../pages/takeaway-orders';
-import { EmployeeRoleEnum } from '../../../interfaces/IEmployee';
-import { observer } from 'mobx-react-lite';
+import {
+  Authorization,
+  Employees,
+  MaterialOrders,
+  Materials,
+  ProductOrders,
+  Products,
+  Specifications
+} from '../../pages';
 
 export const Router: FC = observer(() => {
   return (
@@ -20,32 +23,33 @@ export const Router: FC = observer(() => {
       <Routes>
         {!employeeService.employee$ ? (
           <>
-            <Route path={RouteNames.SIGN_IN} element={<SignIn />} />
-            <Route path="*" element={<Navigate to={RouteNames.SIGN_IN} replace />} />
+            <Route path={RouteNames.AUTHORIZATION} element={<Authorization />} />
+            <Route path="*" element={<Navigate to={RouteNames.AUTHORIZATION} replace />} />
           </>
         ) : (
           <Route element={<Navbar />}>
             {employeeService.employee$.role === EmployeeRoleEnum.ADMIN ? (
               <>
-                <Route path={RouteNames.PROFILES} element={<Profiles />} />
-                <Route path="*" element={<Navigate to={RouteNames.PROFILES} replace />} />
+                <Route path={RouteNames.EMPLOYEES} element={<Employees />} />
+                <Route path="*" element={<Navigate to={RouteNames.EMPLOYEES} replace />} />
               </>
             ) : employeeService.employee$.role === EmployeeRoleEnum.TECHNOLOGIST ? (
               <>
                 <Route path={RouteNames.PRODUCTS} element={<Products />} />
+                <Route path={RouteNames.MATERIALS} element={<Materials />} />
                 <Route path={RouteNames.SPECIFICATIONS} element={<Specifications />} />
                 <Route path="*" element={<Navigate to={RouteNames.PRODUCTS} replace />} />
               </>
             ) : employeeService.employee$.role === EmployeeRoleEnum.DISPATCHER ? (
               <>
-                <Route path={RouteNames.PRODUCTION_ORDERS} element={<ProductionOrders />} />
-                <Route path="*" element={<Navigate to={RouteNames.PRODUCTION_ORDERS} replace />} />
+                <Route path={RouteNames.PRODUCT_ORDERS} element={<ProductOrders />} />
+                <Route path="*" element={<Navigate to={RouteNames.PRODUCT_ORDERS} replace />} />
               </>
             ) : (
               <>
-                <Route path={RouteNames.TAKEAWAY_ORDERS} element={<TakeawayOrders />} />
-                <Route path={RouteNames.PRODUCTION_ORDERS} element={<ProductionOrders />} />
-                <Route path="*" element={<Navigate to={RouteNames.TAKEAWAY_ORDERS} replace />} />
+                <Route path={RouteNames.PRODUCT_ORDERS} element={<ProductOrders />} />
+                <Route path={RouteNames.MATERIAL_ORDERS} element={<MaterialOrders />} />
+                <Route path="*" element={<Navigate to={RouteNames.PRODUCT_ORDERS} replace />} />
               </>
             )}
           </Route>

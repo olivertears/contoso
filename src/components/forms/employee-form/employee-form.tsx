@@ -1,9 +1,10 @@
 import { FC } from 'react';
 import { useForm } from 'react-hook-form';
+
+import { ROLE_VALUES } from '../../../constants';
 import { Button, Form, Input, Select, Title } from '../../ui';
+import { EmployeeData } from '../../../api/employee';
 import { EmployeeFormProps } from './employee-form.types';
-import { EmployeeData } from '../../../api/employee/employee.types';
-import { ROLE_VALUES } from './employee-form.constants';
 
 export const EmployeeForm: FC<EmployeeFormProps> = ({ employee }) => {
   const {

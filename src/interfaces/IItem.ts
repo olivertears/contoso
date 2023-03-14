@@ -1,7 +1,11 @@
 export interface IItem {
-  id: string;
+  id: number;
   name: string;
-  type: ItemTypeType;
+  type: ItemTypeEnum;
 }
 
-export type ItemTypeType = 'DONE';
+export enum ItemTypeEnum {
+  PRODUCT = 'PRODUCT',
+  ASSEMBLY_MATERIAL = 'ASSEMBLY_MATERIAL',
+  PAINTING_MATERIAL = 'PAINTING_MATERIAL'
+}

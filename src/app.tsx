@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import { Router } from './components/templates/router';
+import { Router } from './components/templates';
 
 const App: FC = () => {
   return <Router />;

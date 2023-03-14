@@ -1,5 +1,5 @@
 import { FC } from 'react';
 
-export const ProductionOrders: FC = () => {
+export const Materials: FC = () => {
   return <div></div>;
 };

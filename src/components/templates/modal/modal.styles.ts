@@ -31,5 +31,4 @@ export const CloseButton = styled.svg`
   height: 20px;
   top: 5px;
   right: 5px;
-  cursor: pointer;
 `;

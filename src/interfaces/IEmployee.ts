@@ -1,9 +1,9 @@
 export interface IEmployee {
-  id: string;
+  id: number;
   email: string;
   firstName: string;
-  middleName: string;
   lastName: string;
+  middleName: string;
   role: EmployeeRoleEnum;
   isActive: boolean;
 }

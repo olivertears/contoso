@@ -2,11 +2,11 @@ import { FC } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { Button, Form, Input, Title } from '../../ui';
-import { AuthenticateData } from '../../../api/auth/auth.types';
-import { EmployeeRoleEnum, IEmployee } from '../../../interfaces/IEmployee';
+import { AuthenticateData } from '../../../api/auth';
+import { EmployeeRoleEnum, IEmployee } from '../../../interfaces';
 import { employeeService } from '../../../services/employee';
 
-export const SignInForm: FC = () => {
+export const AuthorizationForm: FC = () => {
   const {
     register,
     handleSubmit,

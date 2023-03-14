@@ -11,6 +11,7 @@ export const CloseIcon: FC<CloseIconProps> = ({ Svg, onClick }) => {
       strokeLinecap="round"
       strokeLinejoin="round"
       strokeWidth="2px"
+      cursor="pointer"
       onClick={onClick}
     >
       <svg />

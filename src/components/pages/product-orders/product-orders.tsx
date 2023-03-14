@@ -1,5 +1,5 @@
 import { FC } from 'react';
 
-export const TakeawayOrders: FC = () => {
+export const ProductOrders: FC = () => {
   return <div></div>;
 };

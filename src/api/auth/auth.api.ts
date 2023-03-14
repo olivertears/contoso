@@ -1,16 +1,12 @@
 import { AxiosResponse } from 'axios';
-import { IAuthApi, AuthenticateData, RegisterData } from './auth.types';
 import { api } from '../api';
+import { IAuthApi, AuthenticateData } from './auth.types';
 
 class AuthApi implements IAuthApi {
   endpoint = 'auth' as const;
 
   authenticate(authenticateData: AuthenticateData): Promise<AxiosResponse<string>> {
     return api.post(this.endpoint, authenticateData);
-  }
-
-  register(registerData: RegisterData): Promise<AxiosResponse<string>> {
-    return api.post(this.endpoint, registerData);
   }
 }
 

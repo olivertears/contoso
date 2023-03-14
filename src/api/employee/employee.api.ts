@@ -1,7 +1,7 @@
 import { AxiosResponse } from 'axios';
-import { IEmployeeApi, EmployeeData } from './employee.types';
 import { api } from '../api';
 import { IEmployee } from '../../interfaces/IEmployee';
+import { IEmployeeApi, EmployeeData } from './employee.types';
 
 class EmployeeApi implements IEmployeeApi {
   endpoint = 'employee' as const;
