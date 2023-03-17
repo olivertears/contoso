@@ -1,5 +1,7 @@
 export interface IOperation {
   id: number;
+  queue: number;
+  time: number;
   name: OperationNameEnum;
 }
 

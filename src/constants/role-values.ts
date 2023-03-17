@@ -1,4 +1,4 @@
-import { EmployeeRoleEnum } from '../interfaces/IEmployee';
+import { EmployeeRoleEnum } from '../interfaces';
 
 export const ROLE_VALUES: { [key in Exclude<EmployeeRoleEnum, EmployeeRoleEnum.ADMIN>]: string } = {
   TECHNOLOGIST: 'Технолог',

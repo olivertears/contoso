@@ -1,4 +1,4 @@
-import { IEmployee } from '../../../interfaces/IEmployee';
+import { IEmployee } from '../../../interfaces';
 
 export interface EmployeeFormProps {
   employee?: IEmployee;

@@ -1,10 +1,7 @@
-export type { IEmployee } from './IEmployee';
-export { EmployeeRoleEnum } from './IEmployee';
-export type { IItem } from './IItem';
-export { ItemTypeEnum } from './IItem';
+export { EmployeeRoleEnum, type IEmployee } from './IEmployee';
+export { ItemTypeEnum, type IItem } from './IItem';
 export type { IMaterialOrder } from './IMaterialOrder';
 export type { IOperation } from './IOperation';
 export { OperationNameEnum } from './IOperation';
-export type { IProductOrder } from './IProductOrder';
-export { ProductOrderStatusEnum } from './IProductOrder';
+export { ProductOrderStatusEnum, type IProductOrder } from './IProductOrder';
 export type { ISpecification } from './ISpecification';
