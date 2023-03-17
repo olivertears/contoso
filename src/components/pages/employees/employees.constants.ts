@@ -1,6 +1,6 @@
 import { EmployeeRoleEnum, IEmployee } from '../../../interfaces';
 
-export const PROFILES_HEADER = ['№', 'Логин', 'Фамилия', 'Имя', 'Отчество', 'Должность', 'Статус'];
+export const EMPLOYEES_HEADER = ['№', 'Логин', 'Фамилия', 'Имя', 'Отчество', 'Должность', 'Статус'];
 
 export const EMPLOYEES: IEmployee[] = [
   {

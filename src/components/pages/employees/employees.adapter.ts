@@ -1,6 +1,6 @@
 import { EMPLOYEE_STATUS_VALUES, ROLE_VALUES } from '../../../constants';
-import { ICell } from '../../templates/table';
-import { EmployeeRoleEnum, IEmployee } from '../../../interfaces/IEmployee';
+import { EmployeeRoleEnum, IEmployee } from '../../../interfaces';
+import { ICell } from '../../templates';
 
 export const employeeTableAdapter = (employees: IEmployee[]): ICell[] =>
   employees.map((employee) => ({
