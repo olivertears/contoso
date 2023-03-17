@@ -1,7 +1,8 @@
 export interface ISpecification {
   id: number;
-  itemId: number;
   name: string;
+  itemId: number;
   startDate: string;
   endDate: string;
+  isActive: boolean;
 }

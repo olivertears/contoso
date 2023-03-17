@@ -4,6 +4,6 @@ export const Form = styled.form`
   display: flex;
   flex-direction: column;
   gap: 15px;
-  width: 100%;
+  margin: auto;
   align-items: center;
 `;

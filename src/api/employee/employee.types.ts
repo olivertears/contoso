@@ -1,5 +1,5 @@
 import { AxiosResponse } from 'axios';
-import { EmployeeRoleEnum, IEmployee } from '../../interfaces/IEmployee';
+import { EmployeeRoleEnum, IEmployee } from '../../interfaces';
 
 export interface IEmployeeApi {
   endpoint: 'employee';

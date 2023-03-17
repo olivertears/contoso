@@ -14,15 +14,38 @@ export const Background = styled.div`
 
 export const Modal = styled.div`
   background-color: #fff;
-  padding: 30px;
+  border-radius: 5px;
+  min-width: 300px;
+  max-width: calc(100vw - 60px);
+  max-height: calc(100vh - 120px);
+  overflow: auto;
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    border-radius: 5px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: #dadada;
+    border-radius: 5px;
+
+    :hover {
+      background-color: #434344;
+    }
+  }
+`;
+
+export const ModalContent = styled.div`
+  padding: 20px 30px 30px;
   display: flex;
   flex-direction: column;
-  border-radius: 5px;
-  text-align: center;
   position: relative;
-  width: 360px;
-  max-width: 100%;
-  min-width: 210px;
+  width: min-content;
+  margin: auto;
 `;
 
 export const CloseButton = styled.svg`

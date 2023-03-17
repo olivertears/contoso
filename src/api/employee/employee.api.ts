@@ -1,6 +1,6 @@
 import { AxiosResponse } from 'axios';
 import { api } from '../api';
-import { IEmployee } from '../../interfaces/IEmployee';
+import { IEmployee } from '../../interfaces';
 import { IEmployeeApi, EmployeeData } from './employee.types';
 
 class EmployeeApi implements IEmployeeApi {
