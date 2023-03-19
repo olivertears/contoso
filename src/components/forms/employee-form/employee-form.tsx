@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { useForm } from 'react-hook-form';
 
-import { ROLE_VALUES } from '../../../constants';
+import { EMPLOYEE_ROLE_VALUES } from '../../../constants';
 import { Button, Form, Input, Select, Title } from '../../ui';
 import { EmployeeData } from '../../../api';
 import { EmployeeRoleEnum } from '../../../interfaces';
@@ -57,7 +57,7 @@ export const EmployeeForm: FC<EmployeeFormProps> = ({ employee }) => {
         {...register('middleName', { required: true })}
       />
       <Select label="Должность" {...register('role', { required: true })}>
-        {Object.entries(ROLE_VALUES).map(([role, name]) => (
+        {Object.entries(EMPLOYEE_ROLE_VALUES).map(([role, name]) => (
           <option key={role} value={role}>
             {name}
           </option>

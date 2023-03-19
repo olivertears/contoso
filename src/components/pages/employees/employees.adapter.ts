@@ -1,4 +1,4 @@
-import { EMPLOYEE_STATUS_VALUES, ROLE_VALUES } from '../../../constants';
+import { EMPLOYEE_STATUS_VALUES, EMPLOYEE_ROLE_VALUES } from '../../../constants';
 import { EmployeeRoleEnum, IEmployee } from '../../../interfaces';
 import { ICell } from '../../templates';
 
@@ -11,7 +11,7 @@ export const employeeTableAdapter = (employees: IEmployee[]): ICell[] =>
       employee.lastName,
       employee.firstName,
       employee.middleName,
-      employee.role === EmployeeRoleEnum.ADMIN ? '' : ROLE_VALUES[employee.role],
+      employee.role === EmployeeRoleEnum.ADMIN ? '' : EMPLOYEE_ROLE_VALUES[employee.role],
       EMPLOYEE_STATUS_VALUES[employee.isActive.toString()]
     ]
   }));

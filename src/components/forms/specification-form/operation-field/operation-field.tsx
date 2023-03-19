@@ -2,10 +2,9 @@ import { FC } from 'react';
 import { useFormContext } from 'react-hook-form';
 
 import { OPERATION_NAME_VALUES } from '../../../../constants';
-import { Input, Row, Select, Svg } from '../../../ui';
+import { Header, Input, Row, Select, Svg } from '../../../ui';
 import { DeleteIcon } from '../../../ui/icons';
 import { SpecificationData } from '../../../../api';
-import * as S from './operation-field.styles';
 import { OperationFieldProps } from './operation-field.types';
 
 export const OperationField: FC<OperationFieldProps> = ({ remove, index }) => {
@@ -17,7 +16,7 @@ export const OperationField: FC<OperationFieldProps> = ({ remove, index }) => {
 
   return (
     <Row>
-      <S.OperationQueue>{index + 1}</S.OperationQueue>
+      <Header>{index + 1}</Header>
       <Select label="Операция" {...register(`operations.${index}.name`)}>
         {Object.entries(OPERATION_NAME_VALUES).map(([key, value]) => (
           <option key={key} value={key}>
