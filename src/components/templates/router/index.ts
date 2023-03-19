@@ -1,1 +1,1 @@
-export { Router } from './router.component';
+export { Router } from './router';

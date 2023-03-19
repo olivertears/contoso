@@ -1,12 +1,9 @@
 import { IEmployeeService } from './employee.types';
 import { action, makeObservable, observable } from 'mobx';
-import { IEmployee } from '../../interfaces/IEmployee';
+import { IEmployee } from '../../interfaces';
 
 class EmployeeService implements IEmployeeService {
   employee$: IEmployee | null = null;
-  // employee$ = { role: 'TECHNOLOGIST' } as IEmployee;
-  // employee$ = { role: 'MASTER' } as IEmployee;
-  // employee$ = { role: 'DISPATCHER' } as IEmployee;
 
   constructor() {
     makeObservable(this, {
@@ -15,7 +12,7 @@ class EmployeeService implements IEmployeeService {
     });
   }
 
-  setEmployee(employee: IEmployee) {
+  setEmployee(employee: IEmployee | null) {
     this.employee$ = employee;
   }
 }
