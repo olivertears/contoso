@@ -1,2 +1,2 @@
 export { employeeApi } from './employee.api';
-export type { EmployeeData } from './employee.types';
+export type { ChangePasswordData } from './employee.types';

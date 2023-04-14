@@ -1,19 +1,15 @@
 import { AxiosResponse } from 'axios';
-import { EmployeeRoleEnum, IEmployee } from '../../interfaces';
+import { IEmployee } from '../../interfaces';
 
 export interface IEmployeeApi {
-  endpoint: 'employee';
-  addEmployee: (addEmployeeData: EmployeeData) => Promise<AxiosResponse<IEmployee>>;
-  changeEmployee: (changeEmployeeData: EmployeeData) => Promise<AxiosResponse<IEmployee>>;
+  endpoint: 'employees';
+  addEmployee: (addUserData: Omit<IEmployee, 'id'>) => Promise<AxiosResponse<IEmployee>>;
   getEmployees: () => Promise<AxiosResponse<IEmployee[]>>;
+  updateEmployee: (updateUserData: IEmployee) => Promise<AxiosResponse<IEmployee>>;
+  changePassword: (changePasswordData: ChangePasswordData) => Promise<AxiosResponse>;
 }
 
-export type EmployeeData = {
-  id: number;
-  email: string;
-  lastName: string;
-  firstName: string;
-  middleName: string;
-  role: EmployeeRoleEnum;
-  isActive: boolean;
+export type ChangePasswordData = {
+  oldPassword: string;
+  newPassword: string;
 };
