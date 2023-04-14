@@ -2,9 +2,9 @@ import { FC } from 'react';
 import { useFormContext } from 'react-hook-form';
 
 import { IItem } from '../../../../interfaces';
-import { Input, Row, Select, Svg } from '../../../ui';
+import { Input, Row, Select } from '../../../ui';
 import { DeleteIcon } from '../../../ui/icons';
-import { SpecificationData } from '../../../../api';
+import { SpecificationData } from '../../../../api/specification';
 import { SpecificationMaterialFieldProps } from './material-field.types';
 
 export const MaterialField: FC<SpecificationMaterialFieldProps> = ({ remove, index }) => {
@@ -34,7 +34,7 @@ export const MaterialField: FC<SpecificationMaterialFieldProps> = ({ remove, ind
           required: { value: true, message: 'Необходимо ввести количество' }
         })}
       />
-      <DeleteIcon Svg={Svg} onClick={() => watch(`materials`).length > 1 && remove(index)} />
+      <DeleteIcon onClick={() => watch(`materials`).length > 1 && remove(index)} />
     </Row>
   );
 };

@@ -2,8 +2,8 @@ import { FC } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { Button, Form, Input, Title } from '../../ui';
-import { ProductData } from '../../../api';
 import { ProductFormProps } from './product-form.types';
+import { IItem } from '../../../interfaces';
 
 export const ProductForm: FC<ProductFormProps> = ({ product }) => {
   const {
@@ -11,13 +11,13 @@ export const ProductForm: FC<ProductFormProps> = ({ product }) => {
     handleSubmit,
     watch,
     formState: { errors }
-  } = useForm<ProductData>({
+  } = useForm<Omit<IItem, 'id' | 'type'>>({
     defaultValues: {
       name: product?.name || ''
     }
   });
 
-  const onSubmit = (data: ProductData) => {
+  const onSubmit = (data: Omit<IItem, 'id' | 'type'>) => {
     console.log(data);
   };
 

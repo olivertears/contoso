@@ -1,7 +1,8 @@
 import { FC } from 'react';
 import { useModal } from '../../../hooks';
-import { Modal, Table } from '../../templates';
-import { MaterialOrderForm } from '../../forms';
+import { Modal } from '../../templates/modal';
+import { Table } from '../../templates/table';
+import { MaterialOrderForm } from '../../forms/material-order-form';
 import { PageWrap } from '../../ui';
 import { MATERIAL_ORDERS, MATERIAL_ORDERS_HEADER } from './material-orders.constants';
 import { materialOrderTableAdapter } from './material-orders.adapter';

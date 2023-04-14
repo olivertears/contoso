@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Background = styled.div`
-  position: absolute;
+  position: fixed;
   height: 100vh;
   width: 100vw;
   padding: 20px;
@@ -9,13 +9,13 @@ export const Background = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgba(29, 29, 31, 0.5);
+  background-color: rgba(29, 29, 31, 0.7);
+  z-index: 2;
 `;
 
 export const Modal = styled.div`
   background-color: #fff;
   border-radius: 5px;
-  min-width: 300px;
   max-width: calc(100vw - 60px);
   max-height: calc(100vh - 120px);
   overflow: auto;
@@ -44,14 +44,5 @@ export const ModalContent = styled.div`
   display: flex;
   flex-direction: column;
   position: relative;
-  width: min-content;
-  margin: auto;
-`;
-
-export const CloseButton = styled.svg`
-  position: absolute;
-  width: 20px;
-  height: 20px;
-  top: 5px;
-  right: 5px;
+  width: max-content;
 `;

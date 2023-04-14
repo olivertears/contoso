@@ -1,6 +1,6 @@
 import { IItem, ISpecification, ItemTypeEnum } from '../../../interfaces';
 import { SPECIFICATION_STATUS_VALUES } from '../../../constants';
-import { ICell } from '../../templates';
+import { ICell } from '../../templates/table';
 
 const PRODUCTS: IItem[] = [
   {

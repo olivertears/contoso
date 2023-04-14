@@ -1,6 +1,6 @@
 import { IItem, IProductOrder, ItemTypeEnum } from '../../../interfaces';
 import { PRODUCT_ORDER_STATUS_VALUES } from '../../../constants';
-import { ICell } from '../../templates';
+import { ICell } from '../../templates/table';
 
 const PRODUCTS: IItem[] = [
   {

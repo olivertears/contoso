@@ -1,5 +1,5 @@
 import { OperationNameEnum } from '../../../interfaces';
-import { SpecificationMaterialData, SpecificationOperationData } from '../../../api';
+import { SpecificationMaterialData, SpecificationOperationData } from '../../../api/specification';
 
 export const NEW_MATERIAL: SpecificationMaterialData = {
   itemId: 0,

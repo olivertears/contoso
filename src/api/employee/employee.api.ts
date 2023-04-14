@@ -1,21 +1,36 @@
 import { AxiosResponse } from 'axios';
-import { api } from '../api';
+import { Catch, createApi } from '../../utils';
 import { IEmployee } from '../../interfaces';
-import { IEmployeeApi, EmployeeData } from './employee.types';
+import { ChangePasswordData, IEmployeeApi } from './employee.types';
+
+const api = () => createApi(true);
 
 class EmployeeApi implements IEmployeeApi {
-  endpoint = 'employee' as const;
+  endpoint = 'employees' as const;
 
-  addEmployee(addEmployeeData: EmployeeData): Promise<AxiosResponse<IEmployee>> {
-    return api.post(this.endpoint, addEmployeeData);
+  @Catch
+  addEmployee(addEmployeeData: Omit<IEmployee, 'id'>): Promise<AxiosResponse<IEmployee>> {
+    return api().post(this.endpoint, addEmployeeData);
   }
 
-  changeEmployee(changeEmployeeData: EmployeeData): Promise<AxiosResponse<IEmployee>> {
-    return api.post(this.endpoint, changeEmployeeData);
+  @Catch
+  getEmployee(): Promise<AxiosResponse<IEmployee>> {
+    return api().get(this.endpoint);
   }
 
+  @Catch
   getEmployees(): Promise<AxiosResponse<IEmployee[]>> {
-    return api.get(this.endpoint);
+    return api().get(this.endpoint);
+  }
+
+  @Catch
+  updateEmployee(updateEmployeeData: IEmployee): Promise<AxiosResponse<IEmployee>> {
+    return api().put(this.endpoint, updateEmployeeData);
+  }
+
+  @Catch
+  changePassword(changePasswordData: ChangePasswordData): Promise<AxiosResponse> {
+    return api().put(this.endpoint + '/changePassword', changePasswordData);
   }
 }
 

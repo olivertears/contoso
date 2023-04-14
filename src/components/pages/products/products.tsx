@@ -1,7 +1,8 @@
 import { FC } from 'react';
 import { useModal } from '../../../hooks';
-import { Modal, Table } from '../../templates';
-import { ProductForm } from '../../forms';
+import { Modal } from '../../templates/modal';
+import { Table } from '../../templates/table';
+import { ProductForm } from '../../forms/product-form';
 import { PageWrap } from '../../ui';
 import { PRODUCTS, PRODUCTS_HEADER } from './products.constants';
 import { productTableAdapter } from './products.adapter';

@@ -1,7 +1,8 @@
 import { FC } from 'react';
 import { useModal } from '../../../hooks';
-import { Modal, Table } from '../../templates';
-import { EmployeeForm } from '../../forms';
+import { Modal } from '../../templates/modal';
+import { Table } from '../../templates/table';
+import { EmployeeForm } from '../../forms/employee-form';
 import { PageWrap } from '../../ui';
 import { EMPLOYEES, EMPLOYEES_HEADER } from './employees.constants';
 import { employeeTableAdapter } from './employees.adapter';

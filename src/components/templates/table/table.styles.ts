@@ -29,9 +29,3 @@ export const HeaderCell = styled(BodyCell)`
   background-color: #434344;
   color: #fff;
 `;
-
-export const IconButton = styled.svg`
-  width: 16px;
-  height: 16px;
-  cursor: pointer;
-`;

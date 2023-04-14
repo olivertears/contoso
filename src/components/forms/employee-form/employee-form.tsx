@@ -3,8 +3,7 @@ import { useForm } from 'react-hook-form';
 
 import { EMPLOYEE_ROLE_VALUES } from '../../../constants';
 import { Button, Form, Input, Select, Title } from '../../ui';
-import { EmployeeData } from '../../../api';
-import { EmployeeRoleEnum } from '../../../interfaces';
+import { EmployeeRoleEnum, IEmployee } from '../../../interfaces';
 import { EmployeeFormProps } from './employee-form.types';
 
 export const EmployeeForm: FC<EmployeeFormProps> = ({ employee }) => {
@@ -13,7 +12,7 @@ export const EmployeeForm: FC<EmployeeFormProps> = ({ employee }) => {
     handleSubmit,
     watch,
     formState: { errors }
-  } = useForm<EmployeeData>({
+  } = useForm<Omit<IEmployee, 'id'>>({
     defaultValues: {
       email: employee?.email || '',
       lastName: employee?.lastName || '',
@@ -24,7 +23,7 @@ export const EmployeeForm: FC<EmployeeFormProps> = ({ employee }) => {
     }
   });
 
-  const onSubmit = (data: EmployeeData) => {
+  const onSubmit = (data: Omit<IEmployee, 'id'>) => {
     console.log(data);
   };
 

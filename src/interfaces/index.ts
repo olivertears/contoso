@@ -1,4 +1,5 @@
 export { EmployeeRoleEnum, type IEmployee } from './IEmployee';
+export type { IError } from './IError';
 export { ItemTypeEnum, type IItem } from './IItem';
 export type { IMaterialOrder } from './IMaterialOrder';
 export type { IOperation } from './IOperation';

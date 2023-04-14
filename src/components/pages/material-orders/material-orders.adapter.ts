@@ -1,6 +1,6 @@
 import { IEmployee, IItem, IMaterialOrder, IProductOrder, ItemTypeEnum } from '../../../interfaces';
 import { MATERIAL_ORDER_STATUS_VALUES } from '../../../constants';
-import { ICell } from '../../templates';
+import { ICell } from '../../templates/table';
 
 const PRODUCT_ORDERS: IProductOrder[] = [
   {

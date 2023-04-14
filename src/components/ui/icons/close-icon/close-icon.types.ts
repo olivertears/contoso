@@ -1,6 +1,6 @@
-import { SVGProps, ReactElement } from 'react';
+import { MouseEventHandler } from 'react';
 
 export interface CloseIconProps {
-  Svg: (props: SVGProps<SVGElement>) => ReactElement;
-  onClick?: () => void;
+  width?: string;
+  onClick?: MouseEventHandler;
 }

@@ -1,9 +1,9 @@
 import { FC } from 'react';
 import { Divider, Header, PageWrap, Title } from '../../ui';
 import { EmployeeRoleEnum, IEmployee } from '../../../interfaces';
-import { ChangePasswordForm } from '../../forms';
+import { ChangePasswordForm } from '../../forms/change-password-form';
 import { EMPLOYEE_ROLE_VALUES } from '../../../constants';
-import { employeeService } from '../../../services/employee';
+import { userService } from '../../../services/user';
 
 export const Profile: FC = () => {
   const employee: IEmployee = {
@@ -19,9 +19,9 @@ export const Profile: FC = () => {
       </Title>
       <Header>
         Должность:{' '}
-        {employeeService.employee$?.role === EmployeeRoleEnum.ADMIN
+        {userService.user$?.role === EmployeeRoleEnum.ADMIN
           ? 'Администратор'
-          : employeeService.employee$ && EMPLOYEE_ROLE_VALUES[employeeService.employee$.role]}
+          : userService.user$ && EMPLOYEE_ROLE_VALUES[userService.user$.role]}
       </Header>
       <Header>Почта: {employee.email}</Header>
       <Divider />

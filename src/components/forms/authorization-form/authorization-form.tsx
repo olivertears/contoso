@@ -2,9 +2,10 @@ import { FC } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { Button, Form, Input, Title } from '../../ui';
-import { AuthorizationData } from '../../../api';
+import { AuthenticateData } from '../../../api/auth';
 import { EmployeeRoleEnum, IEmployee } from '../../../interfaces';
-import { employeeService } from '../../../services/employee';
+import { userService } from '../../../services/user';
+import { authService } from '../../../services/auth';
 
 export const AuthorizationForm: FC = () => {
   const {
@@ -12,13 +13,14 @@ export const AuthorizationForm: FC = () => {
     handleSubmit,
     watch,
     formState: { errors }
-  } = useForm<AuthorizationData>({ defaultValues: { email: '', password: '' } });
+  } = useForm<AuthenticateData>({ defaultValues: { email: '', password: '' } });
 
-  const onSubmit = (data: AuthorizationData) => {
+  const onSubmit = (data: AuthenticateData) => {
     console.log(data);
     const role = data.email.split('@')[0].toUpperCase();
     if (role in EmployeeRoleEnum) {
-      employeeService.setEmployee({ role } as IEmployee);
+      authService.setToken('token');
+      userService.setUser({ role } as IEmployee);
     }
   };
 

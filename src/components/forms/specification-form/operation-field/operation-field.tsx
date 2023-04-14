@@ -2,9 +2,9 @@ import { FC } from 'react';
 import { useFormContext } from 'react-hook-form';
 
 import { OPERATION_NAME_VALUES } from '../../../../constants';
-import { Header, Input, Row, Select, Svg } from '../../../ui';
+import { Header, Input, Row, Select } from '../../../ui';
 import { DeleteIcon } from '../../../ui/icons';
-import { SpecificationData } from '../../../../api';
+import { SpecificationData } from '../../../../api/specification';
 import { OperationFieldProps } from './operation-field.types';
 
 export const OperationField: FC<OperationFieldProps> = ({ remove, index }) => {
@@ -35,7 +35,7 @@ export const OperationField: FC<OperationFieldProps> = ({ remove, index }) => {
           required: { value: true, message: 'Необходимо ввести количество' }
         })}
       />
-      <DeleteIcon Svg={Svg} onClick={() => watch(`operations`).length > 1 && remove(index)} />
+      <DeleteIcon onClick={() => watch(`operations`).length > 1 && remove(index)} />
     </Row>
   );
 };
