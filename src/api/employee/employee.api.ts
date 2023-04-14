@@ -19,8 +19,8 @@ class EmployeeApi implements IEmployeeApi {
   }
 
   @Catch
-  updateEmployee(updateUserData: IEmployee): Promise<AxiosResponse<IEmployee>> {
-    return api().put(this.endpoint, updateUserData);
+  updateEmployee(updateEmployeeData: IEmployee): Promise<AxiosResponse<IEmployee>> {
+    return api().put(this.endpoint, updateEmployeeData);
   }
 
   @Catch

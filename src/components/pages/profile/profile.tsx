@@ -3,7 +3,7 @@ import { Divider, Header, PageWrap, Title } from '../../ui';
 import { EmployeeRoleEnum, IEmployee } from '../../../interfaces';
 import { ChangePasswordForm } from '../../forms';
 import { EMPLOYEE_ROLE_VALUES } from '../../../constants';
-import { employeeService } from '../../../services/employee';
+import { employeeService } from '../../../services/employee2';
 
 export const Profile: FC = () => {
   const employee: IEmployee = {

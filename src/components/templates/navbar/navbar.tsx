@@ -3,7 +3,7 @@ import { Outlet } from 'react-router-dom';
 
 import * as S from './navbar.styles';
 import { NAVBAR_LINKS } from './navbar.constants';
-import { employeeService } from '../../../services/employee';
+import { employeeService } from '../../../services/employee2';
 import { RouteNames } from '../router/router.types';
 
 export const Navbar: FC = () => {

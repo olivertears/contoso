@@ -1,11 +1,11 @@
 import { AxiosResponse } from 'axios';
 import { Catch, createApi } from '../../utils';
 import { IItem } from '../../interfaces';
-import { IItemApi } from './items.types';
+import { IItemApi } from './item.types';
 
 const api = () => createApi(true);
 
-class ItemsApi implements IItemApi {
+class ItemApi implements IItemApi {
   endpoint = 'items' as const;
 
   @Catch
@@ -24,4 +24,4 @@ class ItemsApi implements IItemApi {
   }
 }
 
-export const itemApi = new ItemsApi();
+export const itemApi = new ItemApi();

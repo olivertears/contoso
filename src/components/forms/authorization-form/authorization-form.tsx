@@ -4,7 +4,7 @@ import { useForm } from 'react-hook-form';
 import { Button, Form, Input, Title } from '../../ui';
 import { AuthorizationData } from '../../../api';
 import { EmployeeRoleEnum, IEmployee } from '../../../interfaces';
-import { employeeService } from '../../../services/employee';
+import { employeeService } from '../../../services/employee2';
 
 export const AuthorizationForm: FC = () => {
   const {
