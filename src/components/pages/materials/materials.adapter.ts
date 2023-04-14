@@ -1,5 +1,5 @@
 import { IItem } from '../../../interfaces';
-import { ICell } from '../../templates';
+import { ICell } from '../../templates/table';
 import { MATERIAL_TYPE_VALUES } from '../../../constants';
 
 export const materialTableAdapter = (materials: IItem[]): ICell[] =>

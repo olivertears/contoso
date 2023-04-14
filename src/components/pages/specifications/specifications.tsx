@@ -1,7 +1,8 @@
 import { FC } from 'react';
 import { useModal } from '../../../hooks';
-import { Modal, Table } from '../../templates';
-import { SpecificationForm } from '../../forms';
+import { Modal } from '../../templates/modal';
+import { Table } from '../../templates/table';
+import { SpecificationForm } from '../../forms/specification-form';
 import { PageWrap } from '../../ui';
 import { SPECIFICATIONS, SPECIFICATIONS_HEADER } from './specifications.constants';
 import { specificationTableAdapter } from './specifications.adapter';

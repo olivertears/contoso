@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { Button, Form, Input, Title } from '../../ui';
-import { ChangePasswordData } from '../../../api';
+import { ChangePasswordData } from '../../../api/employee';
 
 export const ChangePasswordForm: FC = () => {
   const {

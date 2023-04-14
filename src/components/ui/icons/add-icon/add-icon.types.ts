@@ -1,6 +1,5 @@
-import { SVGProps, ReactElement } from 'react';
-
 export interface AddIconProps {
-  Svg: (props: SVGProps<SVGElement>) => ReactElement;
   onClick?: () => void;
+  width?: string;
+  margin?: string;
 }

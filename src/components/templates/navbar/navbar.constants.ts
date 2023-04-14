@@ -25,8 +25,7 @@ export const NAVBAR_MASTER_LINKS: Link[] = [
   { name: 'Профиль', link: RouteNames.PROFILE }
 ];
 
-export const NAVBAR_LINKS: { [key in EmployeeRoleEnum | 'COMMON']: Link[] } = {
-  COMMON: [],
+export const NAVBAR_LINKS: { [key in EmployeeRoleEnum]: Link[] } = {
   ADMIN: NAVBAR_ADMIN_LINKS,
   TECHNOLOGIST: NAVBAR_TECHNOLOGIST_LINKS,
   DISPATCHER: NAVBAR_DISPATCHER_LINKS,

@@ -1,2 +1,2 @@
 export { authApi } from './auth.api';
-export type { AuthenticateData } from './auth.types';
+export type { AuthResponse, AuthenticateData } from './auth.types';

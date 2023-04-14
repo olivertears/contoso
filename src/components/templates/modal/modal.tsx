@@ -11,7 +11,7 @@ export const Modal: FC<PropsWithChildren<ModalProps>> = ({ children, isModalOpen
         <S.Background onClick={hideModal}>
           <S.Modal onClick={(event) => event.stopPropagation()}>
             <S.ModalContent>
-              <CloseIcon Svg={S.CloseButton} onClick={hideModal} />
+              <CloseIcon onClick={hideModal} />
               {children}
             </S.ModalContent>
           </S.Modal>

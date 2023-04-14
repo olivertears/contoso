@@ -2,7 +2,6 @@ import { action, makeObservable, observable } from 'mobx';
 import { IEmployee } from '../../interfaces';
 import { ChangePasswordData, employeeApi } from '../../api/employee';
 import { IEmployeeService } from './employee.types';
-import { authService } from '../auth';
 
 class EmployeeService implements IEmployeeService {
   employees$: IEmployee[] = [];

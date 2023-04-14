@@ -2,8 +2,7 @@ import { FC } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { MATERIAL_TYPE_VALUES } from '../../../constants';
-import { MaterialData } from '../../../api';
-import { ItemTypeEnum } from '../../../interfaces';
+import { IItem, ItemTypeEnum } from '../../../interfaces';
 import { Button, Form, Input, Select, Title } from '../../ui';
 import { MaterialFormProps } from './material-form.types';
 
@@ -13,14 +12,14 @@ export const MaterialForm: FC<MaterialFormProps> = ({ material }) => {
     handleSubmit,
     watch,
     formState: { errors }
-  } = useForm<MaterialData>({
+  } = useForm<Omit<IItem, 'id'>>({
     defaultValues: {
       name: material?.name || '',
       type: material?.type || ItemTypeEnum.ASSEMBLY_MATERIAL
     }
   });
 
-  const onSubmit = (data: MaterialData) => {
+  const onSubmit = (data: Omit<IItem, 'id'>) => {
     console.log(data);
   };
 

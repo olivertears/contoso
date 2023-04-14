@@ -2,8 +2,7 @@ import { FC } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { Button, Form, Input, Select, Title } from '../../ui';
-import { ProductOrderData } from '../../../api';
-import { IItem } from '../../../interfaces';
+import { IItem, IProductOrder } from '../../../interfaces';
 import { ProductOrderFormProps } from './product-order-form.types';
 
 export const ProductOrderForm: FC<ProductOrderFormProps> = ({ productOrder }) => {
@@ -12,7 +11,7 @@ export const ProductOrderForm: FC<ProductOrderFormProps> = ({ productOrder }) =>
     handleSubmit,
     watch,
     formState: { errors }
-  } = useForm<ProductOrderData>({
+  } = useForm<Omit<IProductOrder, 'id'>>({
     defaultValues: {
       name: productOrder?.name || '',
       itemId: productOrder?.itemId || 0,
@@ -20,7 +19,7 @@ export const ProductOrderForm: FC<ProductOrderFormProps> = ({ productOrder }) =>
     }
   });
 
-  const onSubmit = (data: ProductOrderData) => {
+  const onSubmit = (data: Omit<IProductOrder, 'id'>) => {
     console.log(data);
   };
 

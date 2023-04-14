@@ -1,9 +1,14 @@
 import { FC } from 'react';
 
-import { Router } from './components/templates';
+import { Router } from './components/templates/router';
+import { ErrorBoundary } from './components/templates/error-boundary';
 
 const App: FC = () => {
-  return <Router />;
+  return (
+    <ErrorBoundary>
+      <Router />
+    </ErrorBoundary>
+  );
 };
 
 export default App;

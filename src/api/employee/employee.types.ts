@@ -4,6 +4,7 @@ import { IEmployee } from '../../interfaces';
 export interface IEmployeeApi {
   endpoint: 'employees';
   addEmployee: (addEmployeeData: Omit<IEmployee, 'id'>) => Promise<AxiosResponse<IEmployee>>;
+  getEmployee: () => Promise<AxiosResponse<IEmployee>>;
   getEmployees: () => Promise<AxiosResponse<IEmployee[]>>;
   updateEmployee: (updateEmployeeData: IEmployee) => Promise<AxiosResponse<IEmployee>>;
   changePassword: (changePasswordData: ChangePasswordData) => Promise<AxiosResponse>;

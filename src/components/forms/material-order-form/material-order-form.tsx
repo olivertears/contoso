@@ -2,8 +2,7 @@ import { FC } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { Button, Form, Input, Select, Title } from '../../ui';
-import { MaterialOrderData } from '../../../api';
-import { IItem, IProductOrder } from '../../../interfaces';
+import { IItem, IMaterialOrder, IProductOrder } from '../../../interfaces';
 import { MaterialOrderFormProps } from './material-order-form.types';
 
 export const MaterialOrderForm: FC<MaterialOrderFormProps> = ({ materialOrder }) => {
@@ -12,7 +11,7 @@ export const MaterialOrderForm: FC<MaterialOrderFormProps> = ({ materialOrder })
     handleSubmit,
     watch,
     formState: { errors }
-  } = useForm<MaterialOrderData>({
+  } = useForm<Omit<IMaterialOrder, 'id'>>({
     defaultValues: {
       productOrderId: materialOrder?.productOrderId || 0,
       itemId: materialOrder?.itemId || 0,
@@ -20,7 +19,7 @@ export const MaterialOrderForm: FC<MaterialOrderFormProps> = ({ materialOrder })
     }
   });
 
-  const onSubmit = (data: MaterialOrderData) => {
+  const onSubmit = (data: Omit<IMaterialOrder, 'id'>) => {
     console.log(data);
   };
 

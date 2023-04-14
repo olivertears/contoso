@@ -1,7 +1,8 @@
 import { FC } from 'react';
 import { useModal } from '../../../hooks';
-import { Modal, Table } from '../../templates';
-import { MaterialForm } from '../../forms';
+import { Modal } from '../../templates/modal';
+import { Table } from '../../templates/table';
+import { MaterialForm } from '../../forms/material-form';
 import { PageWrap } from '../../ui';
 import { MATERIALS, MATERIALS_HEADER } from './materials.constants';
 import { materialTableAdapter } from './materials.adapter';

@@ -14,6 +14,11 @@ class EmployeeApi implements IEmployeeApi {
   }
 
   @Catch
+  getEmployee(): Promise<AxiosResponse<IEmployee>> {
+    return api().get(this.endpoint);
+  }
+
+  @Catch
   getEmployees(): Promise<AxiosResponse<IEmployee[]>> {
     return api().get(this.endpoint);
   }

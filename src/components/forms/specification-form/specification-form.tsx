@@ -4,8 +4,7 @@ import { FormProvider, useForm } from 'react-hook-form';
 import { IItem } from '../../../interfaces';
 import { Button, Form, Input, Select, Title } from '../../ui';
 import { AddIcon } from '../../ui/icons';
-import { SpecificationData } from '../../../api';
-import * as S from './specification-form.styles';
+import { SpecificationData } from '../../../api/specification';
 import { SpecificationFormProps } from './specification-form.types';
 import { MaterialField } from './material-field';
 import { OperationField } from './operation-field';
@@ -86,13 +85,13 @@ export const SpecificationForm: FC<SpecificationFormProps> = ({ specification })
         {materials.map((material, index) => (
           <MaterialField key={material.id} remove={removeMaterial} index={index} />
         ))}
-        <AddIcon Svg={S.IconButton} onClick={() => appendMaterial(NEW_MATERIAL)} />
+        <AddIcon onClick={() => appendMaterial(NEW_MATERIAL)} />
 
         <Title>Операции</Title>
         {operations.map((operation, index) => (
           <OperationField key={operation.id} remove={removeOperation} index={index} />
         ))}
-        <AddIcon Svg={S.IconButton} onClick={() => appendOperation(NEW_OPERATION)} />
+        <AddIcon onClick={() => appendOperation(NEW_OPERATION)} />
         <Button type="submit">{specification ? 'СОХРАНИТЬ' : 'ДОБАВИТЬ'}</Button>
       </Form>
     </FormProvider>

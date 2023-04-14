@@ -1,7 +1,8 @@
 import { FC } from 'react';
 import { useModal } from '../../../hooks';
-import { Modal, Table } from '../../templates';
-import { ProductOrderForm } from '../../forms';
+import { Modal } from '../../templates/modal';
+import { Table } from '../../templates/table';
+import { ProductOrderForm } from '../../forms/product-order-form';
 import { PageWrap } from '../../ui';
 import { PRODUCT_ORDERS, PRODUCT_ORDERS_HEADER } from './product-orders.constants';
 import { productOrderTableAdapter } from './product-orders.adapter';
