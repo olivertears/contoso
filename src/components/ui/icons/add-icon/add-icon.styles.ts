@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
-export const Svg = styled.svg<{ width?: string; margin?: string }>`
+export const Svg = styled.svg<{ color?: string; width?: string; margin?: string }>`
   fill: none;
-  stroke: #434344;
+  stroke: ${({ color }) => (color ? color : '#434344')};
   stroke-width: 4;
   stroke-linecap: round;
   stroke-linejoin: round;

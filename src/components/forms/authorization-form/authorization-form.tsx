@@ -1,13 +1,13 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-import { Button, Form, Input, Title } from '../../ui';
+import { Button, Form, Input, Loader, Title } from '../../ui';
 import { AuthenticateData } from '../../../api/auth';
-import { EmployeeRoleEnum, IEmployee } from '../../../interfaces';
-import { userService } from '../../../services/user';
 import { authService } from '../../../services/auth';
+import { emailRegex } from '../../../utils';
 
 export const AuthorizationForm: FC = () => {
+  const [isLoading, setIsLoading] = useState(false);
   const {
     register,
     handleSubmit,
@@ -16,12 +16,11 @@ export const AuthorizationForm: FC = () => {
   } = useForm<AuthenticateData>({ defaultValues: { email: '', password: '' } });
 
   const onSubmit = (data: AuthenticateData) => {
-    console.log(data);
-    const role = data.email.split('@')[0].toUpperCase();
-    if (role in EmployeeRoleEnum) {
-      authService.setToken('token');
-      userService.setUser({ role } as IEmployee);
-    }
+    setIsLoading(true);
+    authService
+      .authenticate(data)
+      .then()
+      .finally(() => setIsLoading(false));
   };
 
   return (
@@ -29,10 +28,15 @@ export const AuthorizationForm: FC = () => {
       <Title>Авторизация</Title>
       <Input
         label="Логин"
-        type="email"
         value={watch('email')}
         error={errors.email?.message}
-        {...register('email', { required: true })}
+        {...register('email', {
+          required: 'Это поле обязательно',
+          pattern: {
+            value: emailRegex,
+            message: 'Указанный адрес электронной почты не существует'
+          }
+        })}
       />
       <Input
         label="Пароль"
@@ -40,11 +44,13 @@ export const AuthorizationForm: FC = () => {
         value={watch('password')}
         error={errors.password?.message}
         {...register('password', {
-          required: true,
-          minLength: { value: 6, message: 'The password is too short' }
+          required: 'Это поле обязательно',
+          minLength: { value: 4, message: 'Минимальная длина пароля - 4 символа' }
         })}
       />
-      <Button type="submit">ВОЙТИ</Button>
+      <Button type="submit" disabled={isLoading}>
+        {isLoading ? <Loader /> : 'ВОЙТИ'}
+      </Button>
     </Form>
   );
 };
