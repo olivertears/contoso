@@ -1,12 +1,15 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { EMPLOYEE_ROLE_VALUES } from '../../../constants';
-import { Button, Form, Input, Select, Title } from '../../ui';
+import { Button, Form, Input, Loader, Select, Title } from '../../ui';
 import { EmployeeRoleEnum, IEmployee } from '../../../interfaces';
 import { EmployeeFormProps } from './employee-form.types';
+import { employeeService } from '../../../services/employee';
+import { emailRegex } from '../../../utils';
 
-export const EmployeeForm: FC<EmployeeFormProps> = ({ employee }) => {
+export const EmployeeForm: FC<EmployeeFormProps> = ({ employee, hideModal }) => {
+  const [isLoading, setIsLoading] = useState(false);
   const {
     register,
     handleSubmit,
@@ -24,45 +27,60 @@ export const EmployeeForm: FC<EmployeeFormProps> = ({ employee }) => {
   });
 
   const onSubmit = (data: Omit<IEmployee, 'id'>) => {
-    console.log(data);
+    setIsLoading(true);
+    employee
+      ? employeeService
+          .updateEmployee({ ...data, id: employee.id })
+          .then(hideModal)
+          .finally(() => setIsLoading(false))
+      : employeeService
+          .addEmployee(data)
+          .then(hideModal)
+          .finally(() => setIsLoading(false));
   };
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
+      {isLoading && <Loader />}
       <Title>Работник</Title>
       <Input
         label="Логин"
-        type="email"
         value={watch('email')}
         error={errors.email?.message}
-        {...register('email', { required: true })}
+        {...register('email', {
+          required: 'Это поле обязательно',
+          pattern: {
+            value: emailRegex,
+            message: 'Указанный адрес электронной почты не существует'
+          }
+        })}
       />
       <Input
         label="Фамилия"
         value={watch('lastName')}
         error={errors.lastName?.message}
-        {...register('lastName', { required: { value: true, message: 'Это поле надо указать' } })}
+        {...register('lastName', { required: 'Это поле обязательно' })}
       />
       <Input
         label="Имя"
         value={watch('firstName')}
         error={errors.firstName?.message}
-        {...register('firstName', { required: true })}
+        {...register('firstName', { required: 'Это поле обязательно' })}
       />
       <Input
         label="Отчество"
         value={watch('middleName')}
         error={errors.middleName?.message}
-        {...register('middleName', { required: true })}
+        {...register('middleName', { required: 'Это поле обязательно' })}
       />
-      <Select label="Должность" {...register('role', { required: true })}>
+      <Select label="Должность" {...register('role', { required: 'Это поле обязательно' })}>
         {Object.entries(EMPLOYEE_ROLE_VALUES).map(([role, name]) => (
           <option key={role} value={role}>
             {name}
           </option>
         ))}
       </Select>
-      <Select label="Статус" {...register('isActive', { required: true })}>
+      <Select label="Статус" {...register('isActive', { required: 'Это поле обязательно' })}>
         <option value={'true'}>Активен</option>
         <option value={'false'}>Неактивен</option>
       </Select>

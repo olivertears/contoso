@@ -12,6 +12,8 @@ export const Button = styled.button`
   width: 300px;
   max-width: 100%;
   min-width: 150px;
+  position: relative;
+  min-height: 36px;
 
   :hover {
     cursor: pointer;

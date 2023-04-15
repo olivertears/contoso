@@ -11,7 +11,7 @@ export const Table: FC<TableProps> = ({ header, body, onIconClick }) => {
           <S.HeaderCell key={title}>{title}</S.HeaderCell>
         ))}
         <S.HeaderCell>
-          <AddIcon width="16px" onClick={() => onIconClick(null)} />
+          <AddIcon color="#dadada" width="16px" onClick={() => onIconClick(null)} />
         </S.HeaderCell>
         {body.map(({ data, id }) => (
           <>
