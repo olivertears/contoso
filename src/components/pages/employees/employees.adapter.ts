@@ -12,6 +12,6 @@ export const employeeTableAdapter = (employees: IEmployee[]): ICell[] =>
       employee.firstName,
       employee.middleName,
       employee.role === EmployeeRoleEnum.ADMIN ? '' : EMPLOYEE_ROLE_VALUES[employee.role],
-      EMPLOYEE_STATUS_VALUES[employee.isActive.toString()]
+      EMPLOYEE_STATUS_VALUES[employee.active.toString()]
     ]
   }));

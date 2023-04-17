@@ -5,7 +5,7 @@ export interface IEmployee {
   lastName: string;
   middleName: string;
   role: EmployeeRoleEnum;
-  isActive: boolean;
+  active: boolean;
 }
 
 export enum EmployeeRoleEnum {

@@ -22,7 +22,7 @@ export const EmployeeForm: FC<EmployeeFormProps> = ({ employee, hideModal }) => 
       firstName: employee?.firstName || '',
       middleName: employee?.middleName || '',
       role: employee?.role || EmployeeRoleEnum.TECHNOLOGIST,
-      isActive: employee?.isActive || true
+      active: employee?.active || true
     }
   });
 
@@ -80,7 +80,7 @@ export const EmployeeForm: FC<EmployeeFormProps> = ({ employee, hideModal }) => 
           </option>
         ))}
       </Select>
-      <Select label="Статус" {...register('isActive', { required: 'Это поле обязательно' })}>
+      <Select label="Статус" {...register('active', { required: 'Это поле обязательно' })}>
         <option value={'true'}>Активен</option>
         <option value={'false'}>Неактивен</option>
       </Select>
