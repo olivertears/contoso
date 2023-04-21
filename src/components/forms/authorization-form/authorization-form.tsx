@@ -5,8 +5,11 @@ import { Button, Form, Input, Loader, Title } from '../../ui';
 import { AuthenticateData } from '../../../api/auth';
 import { authService } from '../../../services/auth';
 import { emailRegex } from '../../../utils';
+import { useNavigate } from 'react-router-dom';
+import { RouteNames } from '../../templates/router/router.types';
 
 export const AuthorizationForm: FC = () => {
+  const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
   const {
     register,
@@ -19,7 +22,7 @@ export const AuthorizationForm: FC = () => {
     setIsLoading(true);
     authService
       .authenticate(data)
-      .then()
+      .then(() => navigate(RouteNames.PROFILE))
       .finally(() => setIsLoading(false));
   };
 
