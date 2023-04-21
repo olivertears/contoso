@@ -11,7 +11,7 @@ class EmployeeApi implements IEmployeeApi {
   }
 
   getEmployee(): Promise<AxiosResponse<IEmployee>> {
-    return privateApi.get(this.endpoint);
+    return privateApi.get(this.endpoint + '/' + 'user');
   }
 
   getEmployees(): Promise<AxiosResponse<IEmployee[]>> {
