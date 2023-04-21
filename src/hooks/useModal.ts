@@ -6,7 +6,10 @@ export const useModal = () => {
 
   const showModal = () => setIsModalOpen(true);
 
-  const hideModal = () => setIsModalOpen(false);
+  const hideModal = () => {
+    setIsModalOpen(false);
+    setSelectedItemId(null);
+  };
 
   const onTableIconClick = (id: number | null) => {
     setSelectedItemId(id);
