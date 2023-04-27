@@ -24,6 +24,6 @@ export const specificationTableAdapter = (specifications: ISpecification[]): ICe
       PRODUCTS.find((product) => product.id === specification.itemId)?.name || '',
       specification.startDate,
       specification.endDate,
-      SPECIFICATION_STATUS_VALUES[specification.isActive.toString()]
+      SPECIFICATION_STATUS_VALUES[specification.active.toString()]
     ]
   }));

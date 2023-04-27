@@ -18,6 +18,7 @@ import { Materials } from '../../pages/materials';
 import { Specifications } from '../../pages/specifications';
 import { ProductOrders } from '../../pages/product-orders';
 import { MaterialOrders } from '../../pages/material-orders';
+import { EmployeeRoleEnum } from '../../../interfaces';
 
 export const Router: FC = observer(() => {
   return (
@@ -32,22 +33,37 @@ export const Router: FC = observer(() => {
 
         <Route element={<ProtectedRoute guard={authGuard} />}>
           <Route element={<Navbar />}>
-            <Route element={<ProtectedRoute guard={roleGuard('ADMIN')} />}>
+            <Route element={<ProtectedRoute guard={roleGuard([EmployeeRoleEnum.ADMIN])} />}>
               <Route path={RouteNames.EMPLOYEES} element={<Employees />} />
             </Route>
 
-            <Route element={<ProtectedRoute guard={roleGuard('TECHNOLOGIST')} />}>
+            <Route element={<ProtectedRoute guard={roleGuard([EmployeeRoleEnum.TECHNOLOGIST])} />}>
               <Route path={RouteNames.PRODUCTS} element={<Products />} />
               <Route path={RouteNames.MATERIALS} element={<Materials />} />
               <Route path={RouteNames.SPECIFICATIONS} element={<Specifications />} />
             </Route>
 
-            <Route element={<ProtectedRoute guard={roleGuard('DISPATCHER')} />}>
+            <Route
+              element={
+                <ProtectedRoute
+                  guard={roleGuard([
+                    EmployeeRoleEnum.DISPATCHER,
+                    EmployeeRoleEnum.ASSEMBLY,
+                    EmployeeRoleEnum.PAINTING
+                  ])}
+                />
+              }
+            >
               <Route path={RouteNames.PRODUCT_ORDERS} element={<ProductOrders />} />
             </Route>
 
-            <Route element={<ProtectedRoute guard={roleGuard('MASTER')} />}>
-              <Route path={RouteNames.PRODUCT_ORDERS} element={<ProductOrders />} />
+            <Route
+              element={
+                <ProtectedRoute
+                  guard={roleGuard([EmployeeRoleEnum.ASSEMBLY, EmployeeRoleEnum.PAINTING])}
+                />
+              }
+            >
               <Route path={RouteNames.MATERIAL_ORDERS} element={<MaterialOrders />} />
             </Route>
 
