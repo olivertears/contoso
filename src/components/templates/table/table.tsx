@@ -18,7 +18,7 @@ export const Table: FC<TableProps> = ({ header, body, onIconClick }) => {
             {data.map((text, index) => (
               <S.BodyCell key={id + text + index}>{String(text)}</S.BodyCell>
             ))}
-            <S.BodyCell>
+            <S.BodyCell key={id + 'edit'}>
               <EditIcon onClick={() => onIconClick(id)} />
             </S.BodyCell>
           </>

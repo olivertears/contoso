@@ -9,7 +9,7 @@ export const SPECIFICATIONS: ISpecification[] = [
     itemId: 0,
     startDate: '12.12.2012',
     endDate: '12.12.2042',
-    isActive: true
+    active: true
   },
   {
     id: 2,
@@ -17,6 +17,6 @@ export const SPECIFICATIONS: ISpecification[] = [
     itemId: 1,
     startDate: '12.12.2012',
     endDate: '12.12.2042',
-    isActive: false
+    active: false
   }
 ];

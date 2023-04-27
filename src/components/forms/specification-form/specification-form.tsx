@@ -18,7 +18,7 @@ export const SpecificationForm: FC<SpecificationFormProps> = ({ specification })
       itemId: specification?.itemId || 0,
       startDate: specification?.startDate || '',
       endDate: specification?.endDate || '',
-      isActive: specification?.isActive || true,
+      isActive: specification?.active || true,
       materials: [NEW_MATERIAL],
       operations: [NEW_OPERATION]
     }

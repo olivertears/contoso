@@ -4,5 +4,5 @@ export interface ISpecification {
   itemId: number;
   startDate: string;
   endDate: string;
-  isActive: boolean;
+  active: boolean;
 }
