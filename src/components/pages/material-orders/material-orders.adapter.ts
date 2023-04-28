@@ -32,12 +32,12 @@ const MATERIALS: IItem[] = [
   {
     id: 0,
     name: 'Грифель карандаша',
-    type: ItemTypeEnum.ASSEMBLY_MATERIAL
+    type: ItemTypeEnum.ASSEMBLY
   },
   {
     id: 1,
     name: 'Колпачок ручки',
-    type: ItemTypeEnum.PAINTING_MATERIAL
+    type: ItemTypeEnum.PAINTING
   }
 ];
 

@@ -24,15 +24,12 @@ export const Employees: FC = () => {
           hideModal={hideModal}
         />
       </Modal>
-      {isLoading ? (
-        <Loader />
-      ) : (
-        <Table
-          header={EMPLOYEES_HEADER}
-          body={employeeTableAdapter(employeeService.employees$)}
-          onIconClick={onTableIconClick}
-        />
-      )}
+      {isLoading && <Loader />}
+      <Table
+        header={EMPLOYEES_HEADER}
+        body={employeeTableAdapter(employeeService.employees$)}
+        onIconClick={onTableIconClick}
+      />
     </PageWrap>
   );
 };

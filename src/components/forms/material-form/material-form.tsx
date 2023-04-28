@@ -1,12 +1,14 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { MATERIAL_TYPE_VALUES } from '../../../constants';
 import { IItem, ItemTypeEnum } from '../../../interfaces';
-import { Button, Form, Input, Select, Title } from '../../ui';
+import { Button, Form, Input, Loader, Select, Title } from '../../ui';
 import { MaterialFormProps } from './material-form.types';
+import { materialService } from '../../../services/material';
 
-export const MaterialForm: FC<MaterialFormProps> = ({ material }) => {
+export const MaterialForm: FC<MaterialFormProps> = ({ material, hideModal }) => {
+  const [isLoading, setIsLoading] = useState(false);
   const {
     register,
     handleSubmit,
@@ -15,16 +17,26 @@ export const MaterialForm: FC<MaterialFormProps> = ({ material }) => {
   } = useForm<Omit<IItem, 'id'>>({
     defaultValues: {
       name: material?.name || '',
-      type: material?.type || ItemTypeEnum.ASSEMBLY_MATERIAL
+      type: material?.type || ItemTypeEnum.ASSEMBLY
     }
   });
 
   const onSubmit = (data: Omit<IItem, 'id'>) => {
-    console.log(data);
+    setIsLoading(true);
+    material
+      ? materialService
+          .updateMaterial({ ...data, id: material.id })
+          .then(hideModal)
+          .finally(() => setIsLoading(false))
+      : materialService
+          .addMaterial(data.name, data.type)
+          .then(hideModal)
+          .finally(() => setIsLoading(false));
   };
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
+      {isLoading && <Loader />}
       <Title>Материал</Title>
       <Input
         label="Название"
