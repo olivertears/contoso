@@ -27,11 +27,9 @@ class MaterialOrderService implements IMaterialOrderService {
     this.setMaterialOrders(data);
   }
 
-  async updateMaterialOrder(updateMaterialOrderData: IMaterialOrder) {
-    const { data } = await materialOrderApi.updateMaterialOrder(updateMaterialOrderData);
-    this.setMaterialOrders(
-      this.materialOrders$.map((item) => (item.id === updateMaterialOrderData.id ? data : item))
-    );
+  async updateMaterialOrder(id: number, done: boolean) {
+    const { data } = await materialOrderApi.updateMaterialOrder({ id, done });
+    this.setMaterialOrders(this.materialOrders$.map((item) => (item.id === id ? data : item)));
   }
 }
 

@@ -1,8 +1,8 @@
-import { IProductOrder } from '../../interfaces';
+import { IProductOrder, ProductOrderStatusEnum } from '../../interfaces';
 
 export interface IProductOrderService {
   productOrders$: IProductOrder[];
   addProductOrder: (addProductOrderData: Omit<IProductOrder, 'id'>) => void;
   getProductOrders: () => void;
-  updateProductOrder: (updateProductOrderData: IProductOrder) => void;
+  updateProductOrder: (id: number, status: ProductOrderStatusEnum) => void;
 }

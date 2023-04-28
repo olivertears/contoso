@@ -1,12 +1,13 @@
-import { OperationNameEnum } from '../../../interfaces';
-import { SpecificationMaterialData, SpecificationOperationData } from '../../../api/specification';
+import { IOperation, OperationNameEnum, SpecificationMaterialData } from '../../../interfaces';
+import { materialService } from '../../../services/material';
 
 export const NEW_MATERIAL: SpecificationMaterialData = {
-  itemId: 0,
+  itemId: materialService.materials$?.[0]?.id,
   quantity: 1
 };
 
-export const NEW_OPERATION: SpecificationOperationData = {
+export const NEW_OPERATION: IOperation = {
   name: OperationNameEnum.ASSEMBLY,
-  time: 5
+  time: 5,
+  queue: 1
 };

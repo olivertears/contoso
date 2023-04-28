@@ -22,7 +22,7 @@ export const EmployeeForm: FC<EmployeeFormProps> = ({ employee, hideModal }) => 
       firstName: employee?.firstName || '',
       middleName: employee?.middleName || '',
       role: employee?.role || EmployeeRoleEnum.TECHNOLOGIST,
-      active: employee?.active || true
+      active: employee ? employee.active : true
     }
   });
 
