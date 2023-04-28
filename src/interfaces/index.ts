@@ -5,4 +5,4 @@ export type { IMaterialOrder } from './IMaterialOrder';
 export type { IOperation } from './IOperation';
 export { OperationNameEnum } from './IOperation';
 export { ProductOrderStatusEnum, type IProductOrder } from './IProductOrder';
-export type { ISpecification } from './ISpecification';
+export type { ISpecification, SpecificationMaterialData } from './ISpecification';

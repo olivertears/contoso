@@ -1,18 +1,15 @@
 import { action, makeObservable, observable } from 'mobx';
-import { specificationApi, SpecificationData, SpecificationDetails } from '../../api/specification';
+import { specificationApi } from '../../api/specification';
 import { ISpecification } from '../../interfaces';
 import { ISpecificationService } from './specification.types';
 
 class SpecificationService implements ISpecificationService {
   specifications$: ISpecification[] = [];
-  specificationDetails$: SpecificationDetails | null = null;
 
   constructor() {
     makeObservable(this, {
       specifications$: observable,
-      setSpecifications: action,
-      specificationDetails$: observable,
-      setSpecificationDetails: action
+      setSpecifications: action
     });
   }
 
@@ -20,13 +17,16 @@ class SpecificationService implements ISpecificationService {
     this.specifications$ = specifications;
   }
 
-  setSpecificationDetails(specificationDetails: SpecificationDetails | null) {
-    this.specificationDetails$ = specificationDetails;
-  }
-
-  async addSpecification(addSpecificationData: Omit<SpecificationData, 'id'>) {
+  async addSpecification(addSpecificationData: Omit<ISpecification, 'id'>) {
     const { data } = await specificationApi.addSpecification(addSpecificationData);
-    this.setSpecifications([...this.specifications$, data]);
+    this.setSpecifications([
+      data,
+      ...this.specifications$.map((specification) =>
+        data.active && specification.itemId === data.itemId && specification.active
+          ? { ...specification, active: false }
+          : specification
+      )
+    ]);
   }
 
   async getSpecifications() {
@@ -34,15 +34,18 @@ class SpecificationService implements ISpecificationService {
     this.setSpecifications(data);
   }
 
-  async getSpecificationDetails(id: number) {
-    const { data } = await specificationApi.getSpecificationDetails(id);
-    this.setSpecificationDetails(data);
-  }
-
-  async updateSpecification(updateSpecificationData: SpecificationData) {
-    const { data } = await specificationApi.updateSpecification(updateSpecificationData);
+  async updateSpecification(id: number, productId: number, active: boolean) {
+    const { data } = await specificationApi.updateSpecification({ id, productId, active });
     this.setSpecifications(
-      this.specifications$.map((item) => (item.id === updateSpecificationData.id ? data : item))
+      this.specifications$.map((specification) => {
+        if (specification.id === id) {
+          return data;
+        }
+
+        return active && specification.itemId === productId && specification.active
+          ? { ...specification, active: false }
+          : specification;
+      })
     );
   }
 }

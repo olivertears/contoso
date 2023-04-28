@@ -4,20 +4,20 @@ import { useFormContext } from 'react-hook-form';
 import { OPERATION_NAME_VALUES } from '../../../../constants';
 import { Header, Input, Row, Select } from '../../../ui';
 import { DeleteIcon } from '../../../ui/icons';
-import { SpecificationData } from '../../../../api/specification';
 import { OperationFieldProps } from './operation-field.types';
+import { ISpecification } from '../../../../interfaces';
 
-export const OperationField: FC<OperationFieldProps> = ({ remove, index }) => {
+export const OperationField: FC<OperationFieldProps> = ({ remove, index, isUpdate }) => {
   const {
     register,
     watch,
     formState: { errors }
-  } = useFormContext<SpecificationData>();
+  } = useFormContext<ISpecification>();
 
   return (
     <Row>
       <Header>{index + 1}</Header>
-      <Select label="Операция" {...register(`operations.${index}.name`)}>
+      <Select label="Операция" {...register(`operations.${index}.name`, { disabled: isUpdate })}>
         {Object.entries(OPERATION_NAME_VALUES).map(([key, value]) => (
           <option key={key} value={key}>
             {value}
@@ -28,14 +28,14 @@ export const OperationField: FC<OperationFieldProps> = ({ remove, index }) => {
         label="Время (мин)"
         type="number"
         value={watch(`operations.${index}.time`)}
-        error={
-          errors.operations && errors.operations[index] && errors.operations[index]?.time?.message
-        }
+        error={errors.operations?.[index]?.time?.message}
         {...register(`operations.${index}.time`, {
-          required: { value: true, message: 'Необходимо ввести количество' }
+          required: { value: true, message: 'Необходимо ввести количество' },
+          valueAsNumber: true,
+          disabled: isUpdate
         })}
       />
-      <DeleteIcon onClick={() => watch(`operations`).length > 1 && remove(index)} />
+      {!isUpdate && <DeleteIcon onClick={() => watch(`operations`).length > 1 && remove(index)} />}
     </Row>
   );
 };

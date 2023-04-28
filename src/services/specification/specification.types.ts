@@ -1,11 +1,8 @@
 import { ISpecification } from '../../interfaces';
-import { SpecificationData, SpecificationDetails } from '../../api/specification';
 
 export interface ISpecificationService {
   specifications$: ISpecification[];
-  specificationDetails$: SpecificationDetails | null;
-  addSpecification: (addSpecificationData: Omit<SpecificationData, 'id'>) => void;
+  addSpecification: (addSpecificationData: Omit<ISpecification, 'id'>) => void;
   getSpecifications: () => void;
-  getSpecificationDetails: (id: number) => void;
-  updateSpecification: (updateSpecificationData: SpecificationData) => void;
+  updateSpecification: (id: number, productId: number, active: boolean) => void;
 }
