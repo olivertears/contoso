@@ -11,7 +11,7 @@ class ItemApi implements IItemApi {
   }
 
   getItems(type: 'PRODUCT' | 'MATERIAL'): Promise<AxiosResponse<IItem[]>> {
-    return privateApi.get(this.endpoint, { params: { type } });
+    return privateApi.get(type === 'PRODUCT' ? this.endpoint : this.endpoint + '/getMaterials');
   }
 
   updateItem(updateItemData: IItem): Promise<AxiosResponse<IItem>> {
