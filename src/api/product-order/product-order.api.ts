@@ -1,7 +1,7 @@
 import { AxiosResponse } from 'axios';
 import { privateApi } from '../index';
 import { IProductOrder } from '../../interfaces';
-import { IProductOrderApi } from './product-order.types';
+import { IProductOrderApi, UpdateProductData } from './product-order.types';
 
 class ProductOrderApi implements IProductOrderApi {
   endpoint = 'productOrders' as const;
@@ -16,7 +16,9 @@ class ProductOrderApi implements IProductOrderApi {
     return privateApi.get(this.endpoint);
   }
 
-  updateProductOrder(updateProductOrderData: IProductOrder): Promise<AxiosResponse<IProductOrder>> {
+  updateProductOrder(
+    updateProductOrderData: UpdateProductData
+  ): Promise<AxiosResponse<IProductOrder>> {
     return privateApi.put(this.endpoint, updateProductOrderData);
   }
 }

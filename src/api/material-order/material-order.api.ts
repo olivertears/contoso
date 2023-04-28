@@ -1,7 +1,7 @@
 import { AxiosResponse } from 'axios';
 import { privateApi } from '../index';
 import { IMaterialOrder } from '../../interfaces';
-import { IMaterialOrderApi } from './material-order.types';
+import { IMaterialOrderApi, UpdateMaterialOrderData } from './material-order.types';
 
 class MaterialOrderApi implements IMaterialOrderApi {
   endpoint = 'materialOrders' as const;
@@ -17,7 +17,7 @@ class MaterialOrderApi implements IMaterialOrderApi {
   }
 
   updateMaterialOrder(
-    updateMaterialOrderData: IMaterialOrder
+    updateMaterialOrderData: UpdateMaterialOrderData
   ): Promise<AxiosResponse<IMaterialOrder>> {
     return privateApi.put(this.endpoint, updateMaterialOrderData);
   }

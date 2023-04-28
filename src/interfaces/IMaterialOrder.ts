@@ -4,5 +4,5 @@ export interface IMaterialOrder {
   productOrderId: number;
   itemId: number;
   quantity: number;
-  isDone: boolean;
+  done: boolean;
 }

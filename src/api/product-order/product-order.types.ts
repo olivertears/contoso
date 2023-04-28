@@ -1,5 +1,5 @@
 import { AxiosResponse } from 'axios';
-import { IProductOrder } from '../../interfaces';
+import { IProductOrder, ProductOrderStatusEnum } from '../../interfaces';
 
 export interface IProductOrderApi {
   endpoint: 'productOrders';
@@ -8,6 +8,11 @@ export interface IProductOrderApi {
   ) => Promise<AxiosResponse<IProductOrder>>;
   getProductOrders: () => Promise<AxiosResponse<IProductOrder[]>>;
   updateProductOrder: (
-    updateProductOrderData: IProductOrder
+    updateProductOrderData: UpdateProductData
   ) => Promise<AxiosResponse<IProductOrder>>;
 }
+
+export type UpdateProductData = {
+  id: number;
+  status: ProductOrderStatusEnum;
+};

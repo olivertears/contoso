@@ -8,6 +8,11 @@ export interface IMaterialOrderApi {
   ) => Promise<AxiosResponse<IMaterialOrder>>;
   getMaterialOrders: () => Promise<AxiosResponse<IMaterialOrder[]>>;
   updateMaterialOrder: (
-    updateMaterialOrderData: IMaterialOrder
+    updateMaterialOrderData: UpdateMaterialOrderData
   ) => Promise<AxiosResponse<IMaterialOrder>>;
 }
+
+export type UpdateMaterialOrderData = {
+  id: number;
+  done: boolean;
+};

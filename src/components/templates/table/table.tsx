@@ -2,8 +2,13 @@ import { FC } from 'react';
 import { AddIcon, EditIcon } from '../../ui/icons';
 import * as S from './table.styles';
 import { TableProps } from './table.types';
+import { useLocation } from 'react-router-dom';
+import { userService } from '../../../services/user';
+import { EmployeeRoleEnum } from '../../../interfaces';
 
 export const Table: FC<TableProps> = ({ header, body, onIconClick }) => {
+  const { pathname } = useLocation();
+
   return (
     <S.Wrap>
       <S.Table columns={header.length + 1}>
@@ -11,7 +16,12 @@ export const Table: FC<TableProps> = ({ header, body, onIconClick }) => {
           <S.HeaderCell key={title}>{title}</S.HeaderCell>
         ))}
         <S.HeaderCell>
-          <AddIcon color="#dadada" width="16px" onClick={() => onIconClick(null)} />
+          {pathname === '/product_orders' &&
+          userService.user$?.role !== EmployeeRoleEnum.DISPATCHER ? (
+            ''
+          ) : (
+            <AddIcon color="#dadada" width="16px" onClick={() => onIconClick(null)} />
+          )}
         </S.HeaderCell>
         {body.map(({ data, id }) => (
           <>
