@@ -4,5 +4,6 @@ export const MATERIAL_TYPE_VALUES: {
   [key in Exclude<ItemTypeEnum, 'PRODUCT'>]: string;
 } = {
   ASSEMBLY: 'Сборка',
-  PAINTING: 'Покраска'
+  PAINTING: 'Покраска',
+  PACKAGING: 'Упаковка'
 };

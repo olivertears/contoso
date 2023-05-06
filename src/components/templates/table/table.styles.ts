@@ -5,6 +5,8 @@ export const Wrap = styled.div`
   border-radius: 10px;
   width: 100%;
   min-width: 200px;
+  display: flex;
+  flex-direction: column;
 `;
 
 export const Table = styled.div<{ columns: number }>`

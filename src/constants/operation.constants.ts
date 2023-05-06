@@ -1,6 +1,7 @@
-import { OperationNameEnum } from '../interfaces';
+import { OperationEnum } from '../interfaces';
 
-export const OPERATION_NAME_VALUES: { [key in OperationNameEnum]: string } = {
+export const OPERATION_NAME_VALUES: { [key in OperationEnum]: string } = {
   ASSEMBLY: 'Сборка',
-  PAINTING: 'Покраска'
+  PAINTING: 'Покраска',
+  PACKAGING: 'Упаковка'
 };
