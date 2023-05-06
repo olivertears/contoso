@@ -5,10 +5,11 @@ export enum RouteNames {
   PROFILE = '/profile',
   EMPLOYEES = '/employees',
 
-  PRODUCTS = '/products',
   MATERIALS = '/materials',
   SPECIFICATIONS = '/specifications',
 
-  PRODUCT_ORDERS = '/product_orders',
-  MATERIAL_ORDERS = '/material_orders'
+  MATERIAL_ORDERS = '/material_orders',
+
+  PRODUCTS = '/products',
+  PRODUCT_ORDERS = '/products/:productId/product_orders'
 }

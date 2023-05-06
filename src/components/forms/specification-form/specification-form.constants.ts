@@ -1,4 +1,4 @@
-import { IOperation, OperationNameEnum, SpecificationMaterialData } from '../../../interfaces';
+import { IOperation, OperationEnum, SpecificationMaterialData } from '../../../interfaces';
 import { materialService } from '../../../services/material';
 
 export const NEW_MATERIAL: SpecificationMaterialData = {
@@ -7,7 +7,7 @@ export const NEW_MATERIAL: SpecificationMaterialData = {
 };
 
 export const NEW_OPERATION: IOperation = {
-  name: OperationNameEnum.ASSEMBLY,
+  name: OperationEnum.ASSEMBLY,
   time: 5,
   queue: 1
 };

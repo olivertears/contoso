@@ -7,8 +7,11 @@ export interface IProductOrder {
 }
 
 export enum ProductOrderStatusEnum {
+  CANCELLED = 'CANCELLED',
   PROCESSING = 'PROCESSING',
   ASSEMBLY = 'ASSEMBLY',
   PAINTING = 'PAINTING',
+  PACKAGING = 'PACKAGING',
+  DELIVERY = 'DELIVERY',
   DONE = 'DONE'
 }

@@ -7,5 +7,6 @@ export interface IItem {
 export enum ItemTypeEnum {
   PRODUCT = 'PRODUCT',
   ASSEMBLY = 'ASSEMBLY',
-  PAINTING = 'PAINTING'
+  PAINTING = 'PAINTING',
+  PACKAGING = 'PACKAGING'
 }

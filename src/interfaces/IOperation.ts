@@ -1,10 +1,11 @@
 export interface IOperation {
   queue: number;
   time: number;
-  name: OperationNameEnum;
+  name: OperationEnum;
 }
 
-export enum OperationNameEnum {
+export enum OperationEnum {
   ASSEMBLY = 'ASSEMBLY',
-  PAINTING = 'PAINTING'
+  PAINTING = 'PAINTING',
+  PACKAGING = 'PACKAGING'
 }

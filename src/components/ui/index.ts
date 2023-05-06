@@ -1,5 +1,6 @@
 export { Input } from './input';
 export { Loader } from './loader';
+export { Search } from './search';
 export { Select } from './select';
 
 export { Button } from './button';
@@ -9,4 +10,5 @@ export { Header } from './header';
 export { Link } from './link';
 export { PageWrap } from './page-wrap';
 export { Row } from './row';
+export { TableHeader } from './table-header';
 export { Title } from './title';
