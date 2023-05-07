@@ -7,6 +7,8 @@ import { Loader, PageWrap } from '../../ui';
 import { MATERIALS_HEADER } from './materials.constants';
 import { materialTableAdapter } from './materials.adapter';
 import { materialService } from '../../../services/material';
+import { EmployeeRoleEnum } from '../../../interfaces';
+import { userService } from '../../../services/user';
 
 export const Materials: FC = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -29,6 +31,7 @@ export const Materials: FC = () => {
         header={MATERIALS_HEADER}
         body={materialTableAdapter(materialService.materials$)}
         onIconClick={onTableIconClick}
+        hasRights={userService.user$?.role === EmployeeRoleEnum.TECHNOLOGIST}
       />
     </PageWrap>
   );

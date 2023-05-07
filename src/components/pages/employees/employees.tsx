@@ -3,11 +3,13 @@ import { useModal } from '../../../hooks';
 import { Modal } from '../../templates/modal';
 import { Table } from '../../templates/table';
 import { EmployeeForm } from '../../forms/employee-form';
-import { Loader, PageWrap, Search, TableHeader } from '../../ui';
+import { Loader, PageWrap, Search, TableBody, TableHeader } from '../../ui';
 import { EMPLOYEES_HEADER } from './employees.constants';
 import { employeeTableAdapter } from './employees.adapter';
 import { employeeService } from '../../../services/employee';
 import { observer } from 'mobx-react-lite';
+import { EmployeeRoleEnum } from '../../../interfaces';
+import { userService } from '../../../services/user';
 
 export const Employees: FC = observer(() => {
   const [isLoading, setIsLoading] = useState(true);
@@ -30,7 +32,7 @@ export const Employees: FC = observer(() => {
   );
 
   return (
-    <PageWrap>
+    <PageWrap padding="0">
       <Modal isModalOpen={isModalOpen} hideModal={hideModal}>
         <EmployeeForm
           employee={employeeService.employees$.find((employee) => employee.id === selectedItemId)}
@@ -41,11 +43,14 @@ export const Employees: FC = observer(() => {
       <TableHeader>
         <Search setSearch={setSearch} />
       </TableHeader>
-      <Table
-        header={EMPLOYEES_HEADER}
-        body={employeeTableAdapter(FILTERED_EMPLOYEES)}
-        onIconClick={onTableIconClick}
-      />
+      <TableBody>
+        <Table
+          header={EMPLOYEES_HEADER}
+          body={employeeTableAdapter(FILTERED_EMPLOYEES)}
+          onIconClick={onTableIconClick}
+          hasRights={userService.user$?.role === EmployeeRoleEnum.ADMIN}
+        />
+      </TableBody>
     </PageWrap>
   );
 });

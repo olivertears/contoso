@@ -4,12 +4,10 @@ export enum RouteNames {
 
   PROFILE = '/profile',
   EMPLOYEES = '/employees',
-
-  MATERIALS = '/materials',
-  SPECIFICATIONS = '/specifications',
-
-  MATERIAL_ORDERS = '/material_orders',
-
   PRODUCTS = '/products',
-  PRODUCT_ORDERS = '/products/:productId/product_orders'
+  PRODUCT_ORDERS = '/product-orders',
+  PRODUCT_ORDERS_ARCHIVE = '/product-orders/archive',
+  MATERIALS = '/materials',
+  MATERIAL_ORDERS = '/material-orders',
+  MATERIAL_ORDERS_ARCHIVE = '/material-orders/archive'
 }

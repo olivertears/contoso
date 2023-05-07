@@ -6,5 +6,5 @@ export const Divider = styled.div`
   height: 2px;
   border-radius: 5px;
   background-color: #1d1d1f;
-  margin: 50px;
+  margin: 30px;
 `;

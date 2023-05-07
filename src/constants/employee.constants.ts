@@ -8,7 +8,9 @@ export const EMPLOYEE_ROLE_VALUES: {
   ASSEMBLY: 'Мастер сборочного цеха',
   PAINTING: 'Мастер покрасочного цеха',
   PACKAGING: 'Упаковщик',
-  DELIVERY: 'Курьер'
+  DELIVERY: 'Курьер',
+  STOREKEEPER: 'Кладовщик',
+  DELIVERYMAN: 'Доставщик'
 };
 
 export const EMPLOYEE_STATUS_VALUES: { [key: string]: string } = {

@@ -17,3 +17,11 @@ export const IdText = styled.div`
   font-size: 12px;
   color: #7d7d7d;
 `;
+
+export const IconWrap = styled.div`
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  display: flex;
+  gap: 10px;
+`;

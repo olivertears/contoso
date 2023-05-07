@@ -1,10 +1,8 @@
-import { ProductOrderStatusEnum } from '../interfaces';
-
-export const PRODUCT_ORDER_STATUS_VALUES: { [key in ProductOrderStatusEnum]: string } = {
+export const PRODUCT_ORDER_STATUS_VALUES: { [key: string]: string } = {
   CANCELLED: 'Отмена',
   PROCESSING: 'В обработке',
-  ASSEMBLY: 'Сборка',
   PAINTING: 'Покраска',
+  ASSEMBLY: 'Сборка',
   PACKAGING: 'Упаковка',
   DELIVERY: 'Доставка',
   DONE: 'Завершено'

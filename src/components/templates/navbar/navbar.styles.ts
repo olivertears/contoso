@@ -13,7 +13,8 @@ export const Navbar = styled.div`
   z-index: 2;
 `;
 
-export const StyledLink = styled(Link)`
+export const StyledLink = styled(Link)<{ active?: boolean }>`
   line-height: 20px;
   padding: 15px;
+  color: ${({ active }) => (active ? '#fff' : '#adadad')};
 `;

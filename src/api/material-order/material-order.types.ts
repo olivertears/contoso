@@ -1,5 +1,5 @@
 import { AxiosResponse } from 'axios';
-import { IMaterialOrder } from '../../interfaces';
+import { IMaterialOrder, OrderStatus } from '../../interfaces';
 
 export interface IMaterialOrderApi {
   endpoint: 'materialOrders';
@@ -14,5 +14,5 @@ export interface IMaterialOrderApi {
 
 export type UpdateMaterialOrderData = {
   id: number;
-  done: boolean;
+  status: OrderStatus;
 };
