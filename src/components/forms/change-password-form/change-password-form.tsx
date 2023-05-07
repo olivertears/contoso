@@ -1,7 +1,7 @@
 import { FC, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-import { Button, Form, Header, Input, Loader, Title } from '../../ui';
+import { Button, Form, Text, Input, Loader } from '../../ui';
 import { ChangePasswordData } from '../../../api/employee';
 import { employeeService } from '../../../services/employee';
 import { useModal } from '../../../hooks';
@@ -39,7 +39,9 @@ export const ChangePasswordForm: FC = () => {
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
-      <Title>Изменить пароль</Title>
+      <Text type="header" bold>
+        Изменить пароль
+      </Text>
       <Input
         label="Старый пароль"
         type="password"
@@ -64,8 +66,10 @@ export const ChangePasswordForm: FC = () => {
         {isLoading ? <Loader /> : 'СОХРАНИТЬ'}
       </Button>
       <Modal isModalOpen={isModalOpen} hideModal={hideModal}>
-        <Header>Поздравляем</Header>
-        Ваш пароль был успешно изменен
+        <Text type="info" bold center margin="0 0 10px">
+          Поздравляем
+        </Text>
+        <Text type="text">Ваш пароль был успешно изменен</Text>
       </Modal>
     </Form>
   );

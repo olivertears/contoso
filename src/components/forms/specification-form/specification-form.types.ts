@@ -1,6 +1,6 @@
-import { ISpecification } from '../../../interfaces';
+import { IItem } from '../../../interfaces';
 
 export interface SpecificationFormProps {
-  specification?: ISpecification;
   hideModal: () => void;
+  product: IItem;
 }

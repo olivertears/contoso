@@ -5,9 +5,9 @@ import { OPERATION_NAME_VALUES } from '../../../../constants';
 import { Header, Input, Row, Select } from '../../../ui';
 import { DeleteIcon } from '../../../ui/icons';
 import { OperationFieldProps } from './operation-field.types';
-import { ISpecification } from '../../../../interfaces';
+import { ISpecification, OperationEnum } from '../../../../interfaces';
 
-export const OperationField: FC<OperationFieldProps> = ({ remove, index, isUpdate }) => {
+export const OperationField: FC<OperationFieldProps> = ({ remove, index, availableOperations }) => {
   const {
     register,
     watch,
@@ -17,12 +17,18 @@ export const OperationField: FC<OperationFieldProps> = ({ remove, index, isUpdat
   return (
     <Row>
       <Header>{index + 1}</Header>
-      <Select label="Операция" {...register(`operations.${index}.name`, { disabled: isUpdate })}>
-        {Object.entries(OPERATION_NAME_VALUES).map(([key, value]) => (
-          <option key={key} value={key}>
-            {value}
-          </option>
-        ))}
+      <Select label="Операция" {...register(`operations.${index}.name`)}>
+        {Object.entries(OPERATION_NAME_VALUES)
+          .filter(
+            ([key]) =>
+              availableOperations.includes(key as OperationEnum) ||
+              watch(`operations.${index}`).name === key
+          )
+          .map(([key, value]) => (
+            <option key={key} value={key}>
+              {value}
+            </option>
+          ))}
       </Select>
       <Input
         label="Время (мин)"
@@ -31,11 +37,10 @@ export const OperationField: FC<OperationFieldProps> = ({ remove, index, isUpdat
         error={errors.operations?.[index]?.time?.message}
         {...register(`operations.${index}.time`, {
           required: { value: true, message: 'Необходимо ввести количество' },
-          valueAsNumber: true,
-          disabled: isUpdate
+          valueAsNumber: true
         })}
       />
-      {!isUpdate && <DeleteIcon onClick={() => watch(`operations`).length > 1 && remove(index)} />}
+      {watch(`operations`).length > 1 && <DeleteIcon onClick={() => remove(index)} />}
     </Row>
   );
 };

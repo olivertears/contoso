@@ -1,5 +1,5 @@
 import { AxiosResponse } from 'axios';
-import { IProductOrder, ProductOrderStatusEnum } from '../../interfaces';
+import { IProductOrder, OrderStatus } from '../../interfaces';
 
 export interface IProductOrderApi {
   endpoint: 'productOrders';
@@ -14,5 +14,5 @@ export interface IProductOrderApi {
 
 export type UpdateProductData = {
   id: number;
-  status: ProductOrderStatusEnum;
+  status: OrderStatus;
 };

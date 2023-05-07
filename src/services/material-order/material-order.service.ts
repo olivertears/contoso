@@ -1,6 +1,6 @@
 import { action, makeObservable, observable } from 'mobx';
 import { materialOrderApi } from '../../api/material-order';
-import { IMaterialOrder } from '../../interfaces';
+import { IMaterialOrder, OrderStatus } from '../../interfaces';
 import { IMaterialOrderService } from './material-order.types';
 
 class MaterialOrderService implements IMaterialOrderService {
@@ -19,7 +19,7 @@ class MaterialOrderService implements IMaterialOrderService {
 
   async addMaterialOrder(addMaterialOrderData: Omit<IMaterialOrder, 'id'>) {
     const { data } = await materialOrderApi.addMaterialOrder(addMaterialOrderData);
-    this.setMaterialOrders([...this.materialOrders$, data]);
+    this.setMaterialOrders([data, ...this.materialOrders$]);
   }
 
   async getMaterialOrders() {
@@ -27,8 +27,8 @@ class MaterialOrderService implements IMaterialOrderService {
     this.setMaterialOrders(data);
   }
 
-  async updateMaterialOrder(id: number, done: boolean) {
-    const { data } = await materialOrderApi.updateMaterialOrder({ id, done });
+  async updateMaterialOrder(id: number, status: OrderStatus) {
+    const { data } = await materialOrderApi.updateMaterialOrder({ id, status });
     this.setMaterialOrders(this.materialOrders$.map((item) => (item.id === id ? data : item)));
   }
 }

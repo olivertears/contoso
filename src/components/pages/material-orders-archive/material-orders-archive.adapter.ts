@@ -1,5 +1,4 @@
 import { IMaterialOrder } from '../../../interfaces';
-import { MATERIAL_ORDER_STATUS_VALUES } from '../../../constants';
 import { ICell } from '../../templates/table';
 import { productOrderService } from '../../../services/product-order';
 import { employeeService } from '../../../services/employee';
@@ -22,7 +21,6 @@ export const materialOrderTableAdapter = (materialOrders: IMaterialOrder[]): ICe
       ),
       materialService.materials$.find((material) => material.id === materialOrder.itemId)?.name ||
         '',
-      materialOrder.quantity.toString(),
-      MATERIAL_ORDER_STATUS_VALUES[materialOrder.done.toString()]
+      materialOrder.quantity.toString()
     ]
   }));

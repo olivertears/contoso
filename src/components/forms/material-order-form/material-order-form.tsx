@@ -8,8 +8,9 @@ import { materialOrderService } from '../../../services/material-order';
 import { productOrderService } from '../../../services/product-order';
 import { materialService } from '../../../services/material';
 import { userService } from '../../../services/user';
+import { observer } from 'mobx-react-lite';
 
-export const MaterialOrderForm: FC<MaterialOrderFormProps> = ({ materialOrder, hideModal }) => {
+export const MaterialOrderForm: FC<MaterialOrderFormProps> = observer(({ hideModal }) => {
   const [isLoading, setIsLoading] = useState(false);
   const availableMaterials = materialService.materials$.filter(
     (material) => material.type.toString() === userService.user$?.role.toString()
@@ -21,44 +22,32 @@ export const MaterialOrderForm: FC<MaterialOrderFormProps> = ({ materialOrder, h
     formState: { errors }
   } = useForm<Omit<IMaterialOrder, 'id'>>({
     defaultValues: {
-      productOrderId: materialOrder?.productOrderId || productOrderService.productOrders$?.[0]?.id,
-      itemId: materialOrder?.itemId || availableMaterials?.[0]?.id,
-      quantity: materialOrder?.quantity || 100,
-      done: materialOrder?.done
+      productOrderId: productOrderService.productOrders$?.[0]?.id,
+      itemId: availableMaterials?.[0]?.id,
+      quantity: 100
     }
   });
 
   const onSubmit = (data: Omit<IMaterialOrder, 'id'>) => {
     setIsLoading(true);
-    materialOrder
-      ? materialOrderService
-          .updateMaterialOrder(materialOrder.id, data.done)
-          .then(hideModal)
-          .finally(() => setIsLoading(false))
-      : materialOrderService
-          .addMaterialOrder({ ...data, employeeId: userService.user$?.id as number })
-          .then(hideModal)
-          .finally(() => setIsLoading(false));
+    materialOrderService
+      .addMaterialOrder({ ...data, employeeId: userService.user$?.id as number })
+      .then(hideModal)
+      .finally(() => setIsLoading(false));
   };
 
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
       {isLoading && <Loader />}
       <Title>Заказ ТМЦ</Title>
-      <Select
-        label="Для"
-        {...register('productOrderId', { required: true, disabled: !!materialOrder })}
-      >
+      <Select label="Для" {...register('productOrderId', { required: true })}>
         {productOrderService.productOrders$.map(({ id, name }) => (
           <option key={id} value={id}>
             {name}
           </option>
         ))}
       </Select>
-      <Select
-        label="Материал"
-        {...register('itemId', { required: true, disabled: !!materialOrder })}
-      >
+      <Select label="Материал" {...register('itemId', { required: true })}>
         {availableMaterials.map(({ id, name }) => (
           <option key={id} value={id}>
             {name}
@@ -71,17 +60,10 @@ export const MaterialOrderForm: FC<MaterialOrderFormProps> = ({ materialOrder, h
         value={watch('quantity')}
         error={errors.quantity?.message}
         {...register('quantity', {
-          required: 'Необходимо ввести количество',
-          disabled: !!materialOrder
+          required: 'Необходимо ввести количество'
         })}
       />
-      {!!materialOrder && (
-        <Select label="Статус" {...register('done', { required: !!materialOrder })}>
-          <option value={'false'}>В обработке</option>
-          <option value={'true'}>Завершено</option>
-        </Select>
-      )}
-      <Button type="submit">{materialOrder ? 'СОХРАНИТЬ' : 'ДОБАВИТЬ'}</Button>
+      <Button type="submit">ДОБАВИТЬ</Button>
     </Form>
   );
-};
+});

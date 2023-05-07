@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC, useMemo, useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 
 import { Button, Form, Input, Loader, Select, Title } from '../../ui';
@@ -10,20 +10,28 @@ import { NEW_MATERIAL, NEW_OPERATION } from './specification-form.constants';
 import { useFieldArr } from '../../../hooks';
 import { specificationService } from '../../../services/specification';
 import { productService } from '../../../services/product';
-import { ISpecification } from '../../../interfaces';
+import {
+  IItem,
+  IOperation,
+  ISpecification,
+  OperationEnum,
+  SpecificationMaterialData
+} from '../../../interfaces';
 import { getDate } from '../../../utils';
+import { materialService } from '../../../services/material';
+import { observer } from 'mobx-react-lite';
 
-export const SpecificationForm: FC<SpecificationFormProps> = ({ specification, hideModal }) => {
+export const SpecificationForm: FC<SpecificationFormProps> = observer(({ hideModal, product }) => {
   const [isLoading, setIsLoading] = useState(false);
   const methods = useForm<ISpecification>({
     defaultValues: {
-      name: specification?.name || '',
-      itemId: specification?.itemId || productService.products$?.[0]?.id,
-      startDate: specification?.startDate || getDate(),
-      endDate: specification?.endDate || '',
-      active: specification ? specification.active : true,
-      materials: specification?.materials || [NEW_MATERIAL],
-      operations: specification?.operations || [NEW_OPERATION]
+      name: '',
+      itemId: product.id,
+      startDate: getDate(),
+      endDate: '',
+      active: false,
+      materials: [NEW_MATERIAL],
+      operations: [NEW_OPERATION]
     }
   });
 
@@ -36,22 +44,53 @@ export const SpecificationForm: FC<SpecificationFormProps> = ({ specification, h
   } = methods;
 
   const [materials, appendMaterial, removeMaterial] = useFieldArr(control, 'materials');
+  const watchedMaterials = watch(`materials`);
+  const controlledMaterials = materials.map((material, index) => ({
+    ...material,
+    ...watchedMaterials?.[index]
+  }));
+  const availableMaterials = useMemo(
+    (): IItem[] =>
+      materialService.materials$.filter(
+        ({ id }) => !controlledMaterials.some(({ itemId }) => itemId === id)
+      ),
+    [controlledMaterials]
+  );
+
   const [operations, appendOperation, removeOperation] = useFieldArr(control, 'operations');
+  const watchedOperations = watch(`operations`);
+  const controlledOperations = operations.map((operation, index) => ({
+    ...operation,
+    ...watchedOperations?.[index]
+  }));
+  const availableOperations = useMemo(
+    (): OperationEnum[] =>
+      Object.keys(OperationEnum).filter(
+        (operation) => !controlledOperations.some(({ name }) => name === operation)
+      ) as OperationEnum[],
+    [controlledOperations]
+  );
+
+  const MATERIAL_DATA: SpecificationMaterialData = {
+    itemId: availableMaterials[0]?.id,
+    quantity: 1
+  };
+
+  const OPERATION_DATA: IOperation = {
+    name: availableOperations[0],
+    time: 5,
+    queue: 1
+  };
 
   const onSubmit = (data: ISpecification) => {
     setIsLoading(true);
-    specification
-      ? specificationService
-          .updateSpecification(specification.id, specification.itemId, data.active)
-          .then(hideModal)
-          .finally(() => setIsLoading(false))
-      : specificationService
-          .addSpecification({
-            ...data,
-            operations: data.operations.map((operation, id) => ({ ...operation, queue: id + 1 }))
-          })
-          .then(hideModal)
-          .finally(() => setIsLoading(false));
+    specificationService
+      .addSpecification({
+        ...data,
+        operations: data.operations.map((operation, id) => ({ ...operation, queue: id + 1 }))
+      })
+      .then(hideModal)
+      .finally(() => setIsLoading(false));
   };
 
   return (
@@ -64,14 +103,10 @@ export const SpecificationForm: FC<SpecificationFormProps> = ({ specification, h
           value={watch('name')}
           error={errors.name?.message}
           {...register('name', {
-            required: 'Необходимо ввести название',
-            disabled: !!specification
+            required: 'Необходимо ввести название'
           })}
         />
-        <Select
-          label="Продукт"
-          {...register('itemId', { valueAsNumber: true, disabled: !!specification })}
-        >
+        <Select label="Продукт" {...register('itemId', { valueAsNumber: true })}>
           {productService.products$.map(({ id, name }) => (
             <option key={id} value={id}>
               {name}
@@ -86,8 +121,7 @@ export const SpecificationForm: FC<SpecificationFormProps> = ({ specification, h
           max={watch('endDate')}
           error={errors.startDate?.message}
           {...register('startDate', {
-            required: 'Необходимо ввести дату начала действия спецификации',
-            disabled: !!specification
+            required: 'Необходимо ввести дату начала действия спецификации'
           })}
         />
         <Input
@@ -97,8 +131,7 @@ export const SpecificationForm: FC<SpecificationFormProps> = ({ specification, h
           min={watch('startDate')}
           error={errors.endDate?.message}
           {...register('endDate', {
-            required: 'Необходимо ввести дату окончания действия спецификации',
-            disabled: !!specification
+            required: 'Необходимо ввести дату окончания действия спецификации'
           })}
         />
         <Select label="Статус" {...register('active', { required: true })}>
@@ -107,28 +140,30 @@ export const SpecificationForm: FC<SpecificationFormProps> = ({ specification, h
         </Select>
 
         <Title>Материалы</Title>
-        {materials.map((material, index) => (
+        {controlledMaterials.map((material, index) => (
           <MaterialField
             key={material.id}
             remove={removeMaterial}
             index={index}
-            isUpdate={!!specification}
+            availableMaterials={availableMaterials}
           />
         ))}
-        {!specification && <AddIcon onClick={() => appendMaterial(NEW_MATERIAL)} />}
+        {!!availableMaterials.length && <AddIcon onClick={() => appendMaterial(MATERIAL_DATA)} />}
 
         <Title>Операции</Title>
-        {operations.map((operation, index) => (
+        {controlledOperations.map((operation, index) => (
           <OperationField
             key={operation.id}
             remove={removeOperation}
             index={index}
-            isUpdate={!!specification}
+            availableOperations={availableOperations}
           />
         ))}
-        {!specification && <AddIcon onClick={() => appendOperation(NEW_OPERATION)} />}
-        <Button type="submit">{specification ? 'СОХРАНИТЬ' : 'ДОБАВИТЬ'}</Button>
+        {!!availableOperations.length && (
+          <AddIcon onClick={() => appendOperation(OPERATION_DATA)} />
+        )}
+        <Button type="submit"> ДОБАВИТЬ</Button>
       </Form>
     </FormProvider>
   );
-};
+});

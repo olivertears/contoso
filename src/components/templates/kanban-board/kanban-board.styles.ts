@@ -1,6 +1,30 @@
 import styled from 'styled-components';
 import { Header } from '../../ui';
 
+export const KanbanWrap = styled.div`
+  display: flex;
+  padding: 0 50px 30px;
+  overflow-x: scroll;
+  max-width: calc(100vw - 17px);
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  ::-webkit-scrollbar-track {
+    border-radius: 5px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: #dadada;
+    border-radius: 5px;
+
+    :hover {
+      background-color: #434344;
+    }
+  }
+`;
+
 export const ColumnWrap = styled.div`
   display: flex;
   gap: 30px;

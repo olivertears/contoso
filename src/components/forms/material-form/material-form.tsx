@@ -46,7 +46,7 @@ export const MaterialForm: FC<MaterialFormProps> = ({ material, hideModal }) => 
           required: { value: true, message: 'Необходимо ввести название' }
         })}
       />
-      <Select label="Назначение" {...register('type', { required: true })}>
+      <Select label="Назначение" {...register('type', { required: true, disabled: !!material })}>
         {Object.entries(MATERIAL_TYPE_VALUES).map(([role, name]) => (
           <option key={role} value={role}>
             {name}
