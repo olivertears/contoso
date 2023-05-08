@@ -3,6 +3,7 @@ import { getFromLocalStorage } from '../../utils';
 import { authApi, AuthenticateData } from '../../api/auth';
 import { IAuthService } from './auth.types';
 import { userService } from '../user';
+import { errorService } from '../error';
 
 class AuthService implements IAuthService {
   token$ = getFromLocalStorage('token') || '';
@@ -21,8 +22,12 @@ class AuthService implements IAuthService {
 
   async authenticate(authenticateData: AuthenticateData) {
     const { data } = await authApi.authenticate(authenticateData);
-    this.setToken(data.token);
-    userService.setUser(data.employee);
+    if (!data.employee.active) {
+      errorService.addError({ message: 'Аккаунт неактивен' });
+    } else {
+      this.setToken(data.token);
+      userService.setUser(data.employee);
+    }
   }
 }
 

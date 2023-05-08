@@ -11,6 +11,7 @@ import { MATERIAL_ORDER_STATUS_VALUES } from '../../../constants';
 import { MaterialOrderCard } from '../../templates/kanban-board/cards/material-order-card';
 import { productOrderService } from '../../../services/product-order';
 import { observer } from 'mobx-react-lite';
+import { specificationService } from '../../../services/specification';
 
 export const MaterialOrders: FC = observer(() => {
   const [isLoading, setIsLoading] = useState(true);
@@ -24,6 +25,7 @@ export const MaterialOrders: FC = observer(() => {
     await employeeService.getEmployees();
     await materialOrderService.getMaterialOrders();
     await productOrderService.getProductOrders();
+    await specificationService.getSpecifications();
   };
 
   const KANBAN_COLUMNS: KanbanColumn<IMaterialOrder>[] = Object.keys(

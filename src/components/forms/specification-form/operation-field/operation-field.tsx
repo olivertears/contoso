@@ -31,7 +31,7 @@ export const OperationField: FC<OperationFieldProps> = ({ remove, index, availab
           ))}
       </Select>
       <Input
-        label="Время (мин)"
+        label="Время (мин / 100 шт.)"
         type="number"
         value={watch(`operations.${index}.time`)}
         error={errors.operations?.[index]?.time?.message}

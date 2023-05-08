@@ -9,5 +9,6 @@ export enum RouteNames {
   PRODUCT_ORDERS_ARCHIVE = '/product-orders/archive',
   MATERIALS = '/materials',
   MATERIAL_ORDERS = '/material-orders',
-  MATERIAL_ORDERS_ARCHIVE = '/material-orders/archive'
+  MATERIAL_ORDERS_ARCHIVE = '/material-orders/archive',
+  STATISTICS = '/statistics'
 }

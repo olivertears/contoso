@@ -7,5 +7,6 @@ export const NAVBAR_LINKS: Link[] = [
   { name: 'Продукты', link: RouteNames.PRODUCTS },
   { name: 'Производственные заказы', link: RouteNames.PRODUCT_ORDERS },
   { name: 'Материалы', link: RouteNames.MATERIALS },
-  { name: 'Заказы ТМЦ', link: RouteNames.MATERIAL_ORDERS }
+  { name: 'Заказы ТМЦ', link: RouteNames.MATERIAL_ORDERS },
+  { name: 'Статистика', link: RouteNames.STATISTICS }
 ];

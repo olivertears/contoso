@@ -60,7 +60,7 @@ export const SpecificationItem: FC<SpecificationItemProps> = observer(({ specifi
           </Text>
           {specification.operations.map(({ name, time }, index) => (
             <Text key={index}>
-              {++index}. {OPERATION_NAME_VALUES[name]} - {time}
+              {++index}. {OPERATION_NAME_VALUES[name]} - {time} мин / 100 шт.
             </Text>
           ))}
         </S.SpecificationInfo>

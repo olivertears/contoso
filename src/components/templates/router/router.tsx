@@ -18,6 +18,7 @@ import { Materials } from '../../pages/materials';
 import { ProductOrders } from '../../pages/product-orders';
 import { ProductOrdersArchive } from '../../pages/product-orders-archive';
 import { MaterialOrders } from '../../pages/material-orders';
+import { Statistics } from '../../pages/statistics';
 import { ProductOrderTabs } from '../../proccesses/product-order-tabs';
 import { MaterialOrderTabs } from '../../proccesses/material-order-tabs';
 import { MaterialOrdersArchive } from '../../pages/material-orders-archive';
@@ -57,6 +58,7 @@ export const Router: FC = observer(() => {
               />
             </Route>
             <Route path={RouteNames.PROFILE} element={<Profile />} />
+            <Route path={RouteNames.STATISTICS} element={<Statistics />} />
             <Route path={RouteNames.NOT_FOUND} element={<NotFound />} />
             <Route path="*" element={<Navigate to={RouteNames.NOT_FOUND} replace />} />
           </Route>
